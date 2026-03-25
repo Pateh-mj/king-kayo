@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>King Kayo Group | Heritage & Power</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap');
+        
+        :root {
+            --gloss-white: #FFFFFF;
+            --forest-power: #042F2C; /* Deep, rich green-black */
+            --heritage-gold: #D4AF37; /* Solid 24K Gold */
+            --zinc-light: #f4f4f4; /* Clean, light background */
+            --nautical-blue: #1B3A4B; /* Deep, muted blue */
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--zinc-light);
+            color: var(--forest-power);
+        }
+
+        h1, .serif-brand { font-family: 'Playfair Display', serif; }
+
+        /* The Grid Lines - Sharper contrast */
+        .inst-border { border-color: rgba(4, 47, 44, 0.15); }
+        
+        .hover-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            background-color: transparent;
+        }
+
+        .hover-card:hover {
+            background-color: var(--forest-power);
+            color: var(--gloss-white);
+            transform: translateY(-8px);
+        }
+
+        .hover-card:hover .icon-box {
+            border-color: var(--heritage-gold);
+            color: var(--heritage-gold);
+            background: transparent;
+        }
+
+        /* Gold Progress Line */
+        .scroll-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--heritage-gold);
+            z-index: 100;
+        }
+
+        /* High-Contrast Button */
+        .btn-heritage {
+            background: var(--forest-power);
+            color: var(--heritage-gold);
+            transition: all 0.3s ease;
+            border: 2px solid var(--forest-power);
+        }
+
+        .btn-heritage:hover {
+            background: transparent;
+            color: var(--forest-power);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal { animation: fadeInUp 1s ease-out forwards; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="scroll-line" id="myBar" style="width: 0%;"></div>
+
+    <header class="w-full py-6 lg:py-8 px-6 lg:px-20 flex justify-between items-center bg-white/95 backdrop-blur-md sticky top-0 z-[100] border-b inst-border">
+    <div class="flex flex-col">
+        <h2 class="serif-brand text-2xl lg:text-3xl tracking-[0.2em] leading-none text-[#042F2C]">King~Kayo</h2>
+        <p class="text-[8px] lg:text-[9px] uppercase tracking-[0.6em] font-black text-[#D4AF37] mt-1">Group of Companies</p>
+    </div>
+
+    <nav class="hidden lg:flex items-center space-x-12">
+        <ul class="flex space-x-10 text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500">
+            <li><a href="#" class="hover:text-[#D4AF37] transition-colors">Strategy</a></li>
+            <li><a href="#" class="hover:text-[#D4AF37] transition-colors">Portfolio</a></li>
+            <li><a href="#" class="hover:text-[#D4AF37] transition-colors">Impact</a></li>
+        </ul>
+        <button class="btn-heritage px-10 py-3 text-[10px] font-black uppercase tracking-widest shadow-xl">
+            Contact Office
+        </button>
+    </nav>
+
+    <button id="menu-btn" class="lg:hidden flex flex-col justify-center items-end space-y-1.5 h-10 w-10 z-[110] outline-none">
+        <span id="line1" class="w-8 h-[2px] bg-[#042F2C] transition-all duration-300"></span>
+        <span id="line2" class="w-5 h-[2px] bg-[#042F2C] transition-all duration-300"></span>
+    </button>
+</header>
+
+<div id="menu-backdrop" class="fixed inset-0 bg-black/40 opacity-0 pointer-events-none transition-opacity duration-500 z-[101]"></div>
+
+<div id="mobile-menu" class="fixed top-0 right-0 h-full w-[80%] max-w-[400px] bg-[#042F2C] z-[102] translate-x-full transition-transform duration-500 ease-in-out shadow-[-20px_0_50px_rgba(0,0,0,0.2)] flex flex-col p-12">
+    <div class="mt-20 space-y-10">
+        <p class="text-[#D4AF37] text-[10px] font-black uppercase tracking-[0.4em] border-b border-white/10 pb-4">Links</p>
+        <ul class="space-y-8">
+            <li><a href="#" class="text-white text-2xl font-black uppercase tracking-widest block hover:text-[#D4AF37] transition-colors">Strategy</a></li>
+            <li><a href="#" class="text-white text-2xl font-black uppercase tracking-widest block hover:text-[#D4AF37] transition-colors">Portfolio</a></li>
+            <li><a href="#" class="text-white text-2xl font-black uppercase tracking-widest block hover:text-[#D4AF37] transition-colors">Impact</a></li>
+        </ul>
+        <div class="pt-10">
+            <button class="w-full border-2 border-[#D4AF37] text-[#D4AF37] py-4 text-[10px] font-black uppercase tracking-widest hover:bg-[#D4AF37] hover:text-[#042F2C] transition-all">
+                Contact Office
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const backdrop = document.getElementById('menu-backdrop');
+    const line1 = document.getElementById('line1');
+    const line2 = document.getElementById('line2');
+
+    function toggleMenu() {
+        const isOpen = !mobileMenu.classList.contains('translate-x-full');
+        
+        if (isOpen) {
+            // Close logic
+            mobileMenu.classList.add('translate-x-full');
+            backdrop.classList.add('opacity-0', 'pointer-events-none');
+            line1.classList.remove('rotate-45', 'translate-y-[4px]');
+            line2.classList.remove('-rotate-45', '-translate-y-[4px]', 'w-8');
+        } else {
+            // Open logic
+            mobileMenu.classList.remove('translate-x-full');
+            backdrop.classList.remove('opacity-0', 'pointer-events-none');
+            line1.classList.add('rotate-45', 'translate-y-[4px]');
+            line2.classList.add('-rotate-45', '-translate-y-[4px]', 'w-8');
+        }
+    }
+
+    menuBtn.addEventListener('click', toggleMenu);
+    backdrop.addEventListener('click', toggleMenu); // Closes when clicking elsewhere
+</script>
+
+    <main class="relative min-h-[90vh] flex items-center px-8 lg:px-20 py-20">
+        <div class="max-w-[1600px] w-full grid lg:grid-cols-12 gap-16 items-center">
+            
+            <div class="lg:col-span-7 reveal">
+
+                <h1 class="text-[10vw] lg:text-[8vw] leading-[0.8] tracking-tighter mb-10 text-[#042F2C]">
+                    Disability-led <br> 
+                    <span class="italic text-heritage-gold">Enterprise.</span>
+                </h1>
+
+                <p class="text-xl lg:text-3xl text-zinc-500 leading-snug font-light max-w-2xl border-l-4 border-heritage-gold pl-8">
+                    Professionalism, <span class="text-forest-power font-bold">Inclusivity</span> and Reliability across all sectors of the Zambian economy.
+                </p>
+            </div>
+
+            <div class="lg:col-span-5 flex flex-col items-center lg:items-end justify-center space-y-16 reveal" style="animation-delay: 0.3s;">
+                
+                <div class="relative group">
+                      <img src="img/King.png" alt="KKG Seal" class="w-full h-full object-cover">
+                </div>
+
+                <div class="flex flex-col items-center lg:items-end group cursor-pointer">
+                    <p class="text-[10px] font-black uppercase tracking-[0.5em] mb-4 text-forest-power group-hover:text-heritage-gold transition-all">Explore Holdings</p>
+                    <div class="w-[2px] h-24 bg-zinc-200 relative overflow-hidden">
+                        <div class="absolute top-0 w-full h-1/2 bg-heritage-gold animate-bounce"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
