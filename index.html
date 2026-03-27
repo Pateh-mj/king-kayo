@@ -1,184 +1,336 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>King Kayo Group | Heritage & Power</title>
+    <title>King Kayo Group | Inclusive Enterprise Excellence</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy-obsidian': '#050B18',
+                        'primary-green': '#042F2C',
+                        'accent-gold': '#D4AF37',
+                        'soft-gold': '#E5C76B',
+                        'luxury-offwhite': '#FDFCFB'
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap');
-        
-        :root {
-            --gloss-white: #FFFFFF;
-            --forest-power: #042F2C; /* Deep, rich green-black */
-            --heritage-gold: #D4AF37; /* Solid 24K Gold */
-            --zinc-light: #f4f4f4; /* Clean, light background */
-            --nautical-blue: #1B3A4B; /* Deep, muted blue */
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FDFCFB; color: #050B18; overflow-x: hidden; }
+        .serif-title { font-family: 'Playfair Display', serif; }
+        .pattern-bg {
+            background-color: #050B18;
+            background-image: radial-gradient(rgba(212, 175, 55, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
         }
-
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: var(--zinc-light);
-            color: var(--forest-power);
+        .glass-nav {
+            background: rgba(253, 252, 251, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(5, 11, 24, 0.05);
         }
-
-        h1, .serif-brand { font-family: 'Playfair Display', serif; }
-
-        /* The Grid Lines - Sharper contrast */
-        .inst-border { border-color: rgba(4, 47, 44, 0.15); }
-        
-        .hover-card {
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            background-color: transparent;
-        }
-
-        .hover-card:hover {
-            background-color: var(--forest-power);
-            color: var(--gloss-white);
-            transform: translateY(-8px);
-        }
-
-        .hover-card:hover .icon-box {
-            border-color: var(--heritage-gold);
-            color: var(--heritage-gold);
-            background: transparent;
-        }
-
-        /* Gold Progress Line */
-        .scroll-line {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 4px;
-            background: var(--heritage-gold);
-            z-index: 100;
-        }
-
-        /* High-Contrast Button */
-        .btn-heritage {
-            background: var(--forest-power);
-            color: var(--heritage-gold);
-            transition: all 0.3s ease;
-            border: 2px solid var(--forest-power);
-        }
-
-        .btn-heritage:hover {
-            background: transparent;
-            color: var(--forest-power);
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .reveal { animation: fadeInUp 1s ease-out forwards; }
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .bento-card { transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); border: 1px solid rgba(5, 11, 24, 0.05); }
+        .bento-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(5, 11, 24, 0.08); }
+        #progress-bar { height: 3px; background: #D4AF37; width: 0%; position: fixed; top: 0; z-index: 150; transition: width 0.1s ease; }
     </style>
 </head>
 <body class="antialiased">
 
-    <div class="scroll-line" id="myBar" style="width: 0%;"></div>
+    <div id="progress-bar"></div>
 
-    <header class="w-full py-6 lg:py-8 px-6 lg:px-20 flex justify-between items-center bg-white/95 backdrop-blur-md sticky top-0 z-[100] border-b inst-border">
-    <div class="flex flex-col">
-        <h2 class="serif-brand text-2xl lg:text-3xl tracking-[0.2em] leading-none text-[#042F2C]">King~Kayo</h2>
-        <p class="text-[8px] lg:text-[9px] uppercase tracking-[0.6em] font-black text-[#D4AF37] mt-1">Group of Companies</p>
-    </div>
+    <nav class="fixed top-0 w-full z-[100] glass-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-primary-green flex items-center justify-center rounded-br-xl">
+                    <span class="text-accent-gold font-serif text-xl font-bold">K</span>
+                </div>
+                <div>
+                    <h2 class="serif-title text-2xl font-bold leading-none text-primary-green">King Kayo</h2>
+                </div>
+            </div>
 
-    <nav class="hidden lg:flex items-center space-x-12">
-        <ul class="flex space-x-10 text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500">
-            <li><a href="#" class="hover:text-[#D4AF37] transition-colors">Strategy</a></li>
-            <li><a href="#" class="hover:text-[#D4AF37] transition-colors">Portfolio</a></li>
-            <li><a href="#" class="hover:text-[#D4AF37] transition-colors">Impact</a></li>
-        </ul>
-        <button class="btn-heritage px-10 py-3 text-[10px] font-black uppercase tracking-widest shadow-xl">
-            Contact Office
-        </button>
-    </nav>
+            <div class="hidden lg:flex items-center space-x-10">
+                <a href="#about" class="text-[10px] uppercase tracking-[0.2em] font-bold hover:text-accent-gold transition-colors">Strategy</a>
+                <a href="#holdings" class="text-[10px] uppercase tracking-[0.2em] font-bold hover:text-accent-gold transition-colors">Holdings</a>
+                <a href="#impact" class="text-[10px] uppercase tracking-[0.2em] font-bold hover:text-accent-gold transition-colors">ESG Impact</a>
+                <a href="#contact" class="bg-navy-obsidian text-white px-6 py-3 text-[10px] uppercase tracking-[0.2em] font-bold hover:bg-primary-green transition-all">Investor Relations</a>
+            </div>
 
-    <button id="menu-btn" class="lg:hidden flex flex-col justify-center items-end space-y-1.5 h-10 w-10 z-[110] outline-none">
-        <span id="line1" class="w-8 h-[2px] bg-[#042F2C] transition-all duration-300"></span>
-        <span id="line2" class="w-5 h-[2px] bg-[#042F2C] transition-all duration-300"></span>
-    </button>
-</header>
-
-<div id="menu-backdrop" class="fixed inset-0 bg-black/40 opacity-0 pointer-events-none transition-opacity duration-500 z-[101]"></div>
-
-<div id="mobile-menu" class="fixed top-0 right-0 h-full w-[80%] max-w-[400px] bg-[#042F2C] z-[102] translate-x-full transition-transform duration-500 ease-in-out shadow-[-20px_0_50px_rgba(0,0,0,0.2)] flex flex-col p-12">
-    <div class="mt-20 space-y-10">
-        <p class="text-[#D4AF37] text-[10px] font-black uppercase tracking-[0.4em] border-b border-white/10 pb-4">Links</p>
-        <ul class="space-y-8">
-            <li><a href="#" class="text-white text-2xl font-black uppercase tracking-widest block hover:text-[#D4AF37] transition-colors">Strategy</a></li>
-            <li><a href="#" class="text-white text-2xl font-black uppercase tracking-widest block hover:text-[#D4AF37] transition-colors">Portfolio</a></li>
-            <li><a href="#" class="text-white text-2xl font-black uppercase tracking-widest block hover:text-[#D4AF37] transition-colors">Impact</a></li>
-        </ul>
-        <div class="pt-10">
-            <button class="w-full border-2 border-[#D4AF37] text-[#D4AF37] py-4 text-[10px] font-black uppercase tracking-widest hover:bg-[#D4AF37] hover:text-[#042F2C] transition-all">
-                Contact Office
+            <button id="menu-btn" class="lg:hidden flex flex-col justify-center items-end space-y-1.5 h-10 w-10 outline-none">
+                <span id="line1" class="w-8 h-[2px] bg-primary-green transition-all duration-300"></span>
+                <span id="line2" class="w-5 h-[2px] bg-primary-green transition-all duration-300"></span>
             </button>
         </div>
-    </div>
-</div>
+    </nav>
 
-<script>
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const backdrop = document.getElementById('menu-backdrop');
-    const line1 = document.getElementById('line1');
-    const line2 = document.getElementById('line2');
-
-    function toggleMenu() {
-        const isOpen = !mobileMenu.classList.contains('translate-x-full');
-        
-        if (isOpen) {
-            // Close logic
-            mobileMenu.classList.add('translate-x-full');
-            backdrop.classList.add('opacity-0', 'pointer-events-none');
-            line1.classList.remove('rotate-45', 'translate-y-[4px]');
-            line2.classList.remove('-rotate-45', '-translate-y-[4px]', 'w-8');
-        } else {
-            // Open logic
-            mobileMenu.classList.remove('translate-x-full');
-            backdrop.classList.remove('opacity-0', 'pointer-events-none');
-            line1.classList.add('rotate-45', 'translate-y-[4px]');
-            line2.classList.add('-rotate-45', '-translate-y-[4px]', 'w-8');
-        }
-    }
-
-    menuBtn.addEventListener('click', toggleMenu);
-    backdrop.addEventListener('click', toggleMenu); // Closes when clicking elsewhere
-</script>
-
-    <main class="relative min-h-[90vh] flex items-center px-8 lg:px-20 py-20">
-        <div class="max-w-[1600px] w-full grid lg:grid-cols-12 gap-16 items-center">
-            
-            <div class="lg:col-span-7 reveal">
-
-                <h1 class="text-[10vw] lg:text-[8vw] leading-[0.8] tracking-tighter mb-10 text-[#042F2C]">
-                    Disability-led <br> 
-                    <span class="italic text-heritage-gold">Enterprise.</span>
-                </h1>
-
-                <p class="text-xl lg:text-3xl text-zinc-500 leading-snug font-light max-w-2xl border-l-4 border-heritage-gold pl-8">
-                    Professionalism, <span class="text-forest-power font-bold">Inclusivity</span> and Reliability across all sectors of the Zambian economy.
-                </p>
-            </div>
-
-            <div class="lg:col-span-5 flex flex-col items-center lg:items-end justify-center space-y-16 reveal" style="animation-delay: 0.3s;">
-                
-                <div class="relative group">
-                      <img src="img/King.png" alt="KKG Seal" class="w-full h-full object-cover">
-                </div>
-
-                <div class="flex flex-col items-center lg:items-end group cursor-pointer">
-                    <p class="text-[10px] font-black uppercase tracking-[0.5em] mb-4 text-forest-power group-hover:text-heritage-gold transition-all">Explore Holdings</p>
-                    <div class="w-[2px] h-24 bg-zinc-200 relative overflow-hidden">
-                        <div class="absolute top-0 w-full h-1/2 bg-heritage-gold animate-bounce"></div>
-                    </div>
-                </div>
-
+    <div id="menu-backdrop" class="fixed inset-0 bg-black/40 transition-opacity duration-500 z-[101] opacity-0 pointer-events-none"></div>
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[80%] max-w-[350px] bg-primary-green z-[102] transition-transform duration-500 ease-in-out flex flex-col p-12 translate-x-full shadow-2xl">
+        <div class="mt-20 space-y-10">
+            <p class="text-accent-gold text-[10px] font-black uppercase tracking-[0.4em] border-b border-white/10 pb-4">Navigation</p>
+            <ul class="space-y-8">
+                <li><a href="#about" class="mobile-link text-white text-2xl font-black uppercase tracking-widest block">Strategy</a></li>
+                <li><a href="#holdings" class="mobile-link text-white text-2xl font-black uppercase tracking-widest block">Holdings</a></li>
+                <li><a href="#impact" class="mobile-link text-white text-2xl font-black uppercase tracking-widest block">Impact</a></li>
+            </ul>
+            <div class="pt-10">
+                <button class="w-full border-2 border-accent-gold text-accent-gold py-4 text-[10px] font-black uppercase tracking-widest hover:bg-accent-gold hover:text-primary-green transition-all">
+                    Contact Office
+                </button>
             </div>
         </div>
-    </main>
+    </div>
 
+    <section class="pattern-bg min-h-screen flex items-center pt-20 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center z-10">
+            <div class="reveal">
+                <span class="text-accent-gold text-xs text-center font-bold uppercase tracking-[1.0em] mb-4 block">Group of Companies</span>
+                <h1 class="serif-title text-4xl md:text-7xl text-white leading-[1.1] mb-8">
+                    Disability<span class="italic font-light text-soft-gold underline decoration-1 underline-offset-8">~Led</span> Enterprise.
+                </h1>
+                <p class="text-slate-300 text-lg mb-10 max-w-lg leading-relaxed font-light">
+                    Professionalism, Inclusivity and Reliability across all sectors of the Zambian economy.
+                </p>
+                <div class="flex items-center space-x-6">
+                    <a href="#holdings" class="bg-accent-gold text-navy-obsidian px-6 py-4 font-bold text-xs uppercase tracking-widest hover:bg-white transition-all">View Portfolios</a>
+                </div>
+            </div>
+            <div class="relative reveal" style="transition-delay: 0.2s;">
+                <div class="absolute -inset-10 bg-accent-gold/10 rounded-full blur-3xl"></div>
+                <img src="img/King.png" alt="Seal" class="relative w-full max-w-lg mx-auto drop-shadow-2xl">
+            </div>
+        </div>
+    </section>
+
+    <section id="holdings" class="py-32 px-6 max-w-7xl mx-auto">
+    <div class="mb-20 reveal">
+        <h2 class="serif-title text-4xl font-bold text-navy-obsidian mb-4">Core Capital Holdings</h2>
+        <div class="w-20 h-1 bg-accent-gold"></div>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 bento-card bg-white p-8 md:p-12 rounded-2xl flex flex-col justify-between group cursor-pointer overflow-hidden relative reveal">
+
+            <div class="relative z-10">
+                <span class="text-accent-gold font-bold text-[15px] tracking-widest uppercase mb-4 block">Division 01</span>
+                <h3 class="serif-title text-3xl font-bold text-navy-obsidian mb-4">Public Health & Cleaning Services</h3>
+                <p class="text-slate-500 max-w-xl mb-8 leading-relaxed">
+                    Delivering high-quality public health, sanitation, environmental, and engineering solutions in a safe, efficient, and sustainable manner, while upholding environmental stewardship.
+                </p>
+            </div>
+            <a href="public-health.html" class="relative z-10 flex items-center text-[10px] font-bold uppercase tracking-widest text-navy-obsidian hover:text-accent-gold transition-colors">
+                Institutional Profile <span class="ml-2">→</span>
+            </a>
+        </div>
+
+        <div class="bento-card bg-navy-obsidian p-8 md:p-12 rounded-2xl text-white group cursor-pointer relative overflow-hidden reveal" style="transition-delay: 0.1s;">
+
+            <div class="relative z-10">
+                <span class="text-soft-gold font-bold text-[15px] tracking-widest uppercase mb-4 block">Division 02</span>
+                <h3 class="serif-title text-2xl font-bold mb-4 leading-tight">Engineering & <br>Logistics</h3>
+                <p class="text-slate-400 text-sm mb-8 leading-relaxed">
+                    An innovative industry player in the Transport, Mining, Chemical, Fertilizer, and Manufacturing sectors, retaining the integrity that defines us.
+                </p>
+            </div>
+            <a href="logistics.html" class="relative z-10 text-[10px] font-bold uppercase tracking-widest text-soft-gold">Details →</a>
+        </div>
+
+        <div class="bento-card bg-luxury-offwhite p-8 md:p-12 rounded-2xl group cursor-pointer relative overflow-hidden reveal" style="transition-delay: 0.2s;">
+
+            <div class="relative z-10">
+                <span class="text-accent-gold font-bold text-[15px] tracking-widest uppercase mb-4 block">Division 03</span>
+                <h3 class="serif-title text-2xl font-bold text-navy-obsidian mb-4 leading-tight">General Supplies</h3>
+                <p class="text-slate-500 text-sm mb-8 leading-relaxed">
+                    Promoting local participation and <span class="text-black font-bold">Disability Inclusion</span> while meeting client specifications in Zambia’s supply chain.
+                </p>
+            </div>
+            <a href="general-supply.html" class="relative z-10 text-[10px] font-bold uppercase tracking-widest text-navy-obsidian">Details →</a>
+        </div>
+
+        <div class="lg:col-span-2 bento-card bg-primary-green p-8 md:p-12 rounded-2xl text-white flex flex-col md:flex-row items-start md:items-center justify-between group reveal" style="transition-delay: 0.3s;">
+            <div class="max-w-md">
+                <h3 class="serif-title text-2xl font-bold mb-4">Regional Expansion</h3>
+                <p class="text-slate-300 text-sm">The incorporation of Shumba Trailers & Fabrications—an engineering and
+                                                    fabrication operation founded in 2011—has enabled King Kayo to respond to
+                                                    growing market demand. KING KAYO GENERAL SUPPLIES LIMITED, Registered in Solwezi, North-Western Province, the company has expanded its
+                                                    operational footprint with presence in Kalumbila, Mufumbwe, Kabwe, Lusaka,
+                                                    Livingstone, Mongu, and other strategic locations nationwide</p>
+            </div>
+            <div class="mt-6 md:mt-0 text-left md:text-right">
+                <div class="text-5xl font-bold text-soft-gold">15+</div>
+                <div class="text-[9px] uppercase tracking-widest text-slate-400">Target Regions</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="relative h-[60vh] overflow-hidden">
+    <div 
+        class="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed  brightness-[1.0]" style="background-image: url('img/King.png');">
+        <div class="absolute inset-0 bg-navy-obsidian/40 mix-blend-multiply"></div>
+    </div>
+</section>
+
+<section id="impact" class="py-32 px-6 bg-white">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-16 items-end mb-24">
+            <div class="reveal">
+                <span class="text-accent-gold text-xs font-bold uppercase tracking-[0.4em] mb-4 block">Our Footprint</span>
+                <h2 class="serif-title text-4xl md:text-5xl text-navy-obsidian leading-tight">
+                    COMMITMENT TO INCLUSIVE <br> ECONOMIC GROWTH.
+                </h2>
+            </div>
+            <div class="reveal" style="transition-delay: 0.1s;">
+                <p class="text-slate-500 text-lg leading-relaxed border-l-2 border-accent-gold pl-8">
+                    As a disability-led enterprise, KING KAYO GENERAL SUPPLIES LIMITED actively
+                    promotes inclusive business participation and contributes to Zambia’s
+                    economic empowerment agenda. The company supports equal opportunity
+                    employment and encourages partnerships that foster sustainable local development.</p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-12 border-y border-slate-100 py-16">
+            <div class="reveal">
+                <div class="text-6xl font-bold text-navy-obsidian mb-4">35<span class="text-accent-gold">%</span></div>
+                <h4 class="serif-title text-xl font-bold mb-2">Inclusive Workforce</h4>
+                <p class="text-slate-500 text-sm leading-relaxed">Of our primary holdings workforce comprises persons with disabilities, setting a National benchmark for Zambia.</p>
+            </div>
+
+            <div class="reveal" style="transition-delay: 0.1s;">
+                <div class="text-6xl font-bold text-navy-obsidian mb-4">100<span class="text-accent-gold">+</span></div>
+                <h4 class="serif-title text-xl font-bold mb-2">Lives Impacted</h4>
+                <p class="text-slate-500 text-sm leading-relaxed">Through our Public Health and Cleaning divisions, we've secured sanitation and health access across 4 provinces.</p>
+            </div>
+
+            <div class="reveal" style="transition-delay: 0.2s;">
+                <div class="text-6xl font-bold text-navy-obsidian mb-4">7<span class="text-accent-gold">-9</span></div>
+                <h4 class="serif-title text-xl font-bold mb-2">Partnerships</h4>
+                <p class="text-slate-500 text-sm leading-relaxed">With strong industry partnerships in 
+                                                                key sectors, SHUMBA Trailers &Fabrications has the ability to execute a wide array of technically complex 
+                                                                projects.</p>
+            </div>
+        </div>
+
+        <div class="mt-20 bg-luxury-offwhite p-8 md:p-16 rounded-3xl flex flex-col lg:flex-row items-center gap-12 reveal">
+            <div class="w-full lg:w-1/2">
+                <img src="img/project.jpg" alt="Community Project" class="rounded-2xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
+            </div>
+            <div class="w-full lg:w-1/2">
+                <h3 class="serif-title text-3xl font-bold text-navy-obsidian mb-6">The "Vision 2030" Initiative</h3>
+                <p class="text-slate-600 mb-8 leading-relaxed">
+                    We are currently developing a specialized training hub in Lusaka designed to equip differently-abled youth with high-level technical skills in Engineering and Supply Chain Management.
+                </p>
+                <ul class="space-y-4 mb-10">
+                    <li class="flex items-center text-sm font-bold text-primary-green">
+                        <span class="w-5 h-5 bg-accent-gold rounded-full mr-3 flex items-center justify-center text-[10px] text-navy-obsidian">✓</span>
+                        Skill Transfer Programs
+                    </li>
+                    <li class="flex items-center text-sm font-bold text-primary-green">
+                        <span class="w-5 h-5 bg-accent-gold rounded-full mr-3 flex items-center justify-center text-[10px] text-navy-obsidian">✓</span>
+                        Seed Funding for Inclusive Startups
+                    </li>
+                </ul>
+                <a href="#" class="inline-block bg-navy-obsidian text-white px-10 py-4 text-[10px] font-black uppercase tracking-widest hover:bg-accent-gold hover:text-navy-obsidian transition-all">
+                    Read ESG Report 2026
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <footer class="bg-navy-obsidian text-white py-20 px-6 border-t border-white/5">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
+            <div class="col-span-2">
+                <div class="flex items-center space-x-3 mb-8">
+                    <div class="w-8 h-8 bg-accent-gold rounded-sm flex items-center justify-center">
+                        <span class="text-navy-obsidian font-serif font-bold">K</span>
+                    </div>
+                    <h3 class="serif-title text-2xl font-bold">King Kayo Group</h3>
+                </div>
+                <p class="text-slate-400 max-w-sm mb-8 leading-relaxed text-sm">
+                    Headquartered in Lusaka, King Kayo Group is a disability-led institutional powerhouse driving sustainable commercial success across Africa.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-[10px] uppercase tracking-[0.2em] font-bold text-accent-gold mb-6">Strategic Links</h4>
+                <ul class="space-y-4 text-xs text-slate-400">
+                    <li><a href="#" class="hover:text-white transition-colors">Investor Relations</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Governance Report</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Inclusive Hiring Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-[10px] uppercase tracking-[0.2em] font-bold text-accent-gold mb-6">Contact</h4>
+                <p class="text-xs text-slate-400 mb-2">Independence Avenue, Lusaka</p>
+                <p class="text-accent-gold font-bold text-xs">hq@kingkayo.com</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] uppercase tracking-widest text-slate-500">
+            <p>© 2026 King Kayo Global Holdings. All Rights Reserved.</p>
+            <div class="flex space-x-8 mt-4 md:mt-0">
+                <a href="#" class="hover:text-white">Privacy</a>
+                <a href="#" class="hover:text-white">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const backdrop = document.getElementById('menu-backdrop');
+        const line1 = document.getElementById('line1');
+        const line2 = document.getElementById('line2');
+
+        // Toggle Function
+        function toggleMenu() {
+            const isClosed = mobileMenu.classList.contains('translate-x-full');
+            
+            if (isClosed) {
+                mobileMenu.classList.remove('translate-x-full');
+                backdrop.classList.remove('opacity-0', 'pointer-events-none');
+                line1.classList.add('rotate-45', 'translate-y-[4px]');
+                line2.classList.add('-rotate-45', '-translate-y-[4px]', 'w-8');
+            } else {
+                mobileMenu.classList.add('translate-x-full');
+                backdrop.classList.add('opacity-0', 'pointer-events-none');
+                line1.classList.remove('rotate-45', 'translate-y-[4px]');
+                line2.classList.remove('-rotate-45', '-translate-y-[4px]', 'w-8');
+            }
+        }
+
+        // Event Listeners
+        menuBtn.addEventListener('click', toggleMenu);
+        backdrop.addEventListener('click', toggleMenu);
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+
+        // Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById('progress-bar').style.width = (winScroll / height) * 100 + '%';
+        });
+    </script>
 </body>
 </html>
