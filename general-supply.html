@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Supplies | King Kayo Group</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap');
+        :root { --forest: #042F2C; --gold: #D4AF37; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FFFFFF; color: var(--forest); }
+        h1, h2, h3, .serif-brand { font-family: 'Playfair Display', serif; }
+        
+        .grain { position: relative; }
+        .grain::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            width: 100%; height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .service-card:hover .service-image { transform: scale(1.05); }
+    </style>
+</head>
+<body class="grain">
+
+    <nav class="p-8 flex justify-between items-center border-b border-zinc-100 sticky top-0 bg-white/95 backdrop-blur-sm z-50">
+        <a href="landing.html" class="flex items-center space-x-2 group">
+            <span class="text-gold group-hover:-translate-x-1 transition-transform">←</span>
+            <span class="text-[10px] font-black uppercase tracking-widest text-forest">Back to Group</span>
+        </a>
+        <div class="serif-brand text-xl font-black text-forest">
+            <img src="img/general-supplies/kk-gs.png" alt="">
+        </div>
+    </nav>
+
+    <main>
+        <section class="flex flex-col lg:flex-row min-h-[85vh]">
+            <div class="lg:w-1/2 relative overflow-hidden bg-forest">
+                <img src="img/general-supplies/General-Order-Supplies.jpg" alt="General Order Supplies" class="w-full h-full object-cover brightness-50">
+                <div class="absolute inset-0 flex items-center justify-center p-12 text-center">
+                     <div class="border border-gold/30 p-10 backdrop-blur-sm">
+                        <p class="text-white text-[10px] font-black uppercase tracking-[0.5em] mb-4">Division: 03</p>
+                        <h1 class="text-white text-5xl lg:text-7xl font-black uppercase tracking-tighter leading-none">
+                        General Supplies
+                        </h1>
+                     </div>
+                </div>
+            </div>
+
+            <div class="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center bg-[#FBFBFB]">
+                <div class="max-w-md">
+                    <h2 class="text-gold font-black text-[11px] uppercase tracking-[0.4em] mb-6">For All Your Commercial Supplies.</h2>
+                    <p class="text-2xl lg:text-4xl font-light text-forest leading-tight mb-8">
+                        Our Disability is not our Inability
+                    </p>
+                    <p class="text-zinc-500 text-sm leading-relaxed mb-12">
+                                KING KAYO GENERAL SUPPLIES LIMITED is a 100% locally owned Zambian
+                                company and a proudly disability-led enterprise operating as a subsidiary of
+                                KING KAYO GROUP OF COMPANIES. The company was established to provide
+                                reliable, efficient, and cost-effective general supply and procurement solutions
+                                to public, private, and commercial institutions across Zambia.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-12">
+                        <div>
+                            <span class="block text-3xl font-black border-b-2 border-gold pb-2 mb-2">45k+</span>
+                            <span class="text-[9px] uppercase font-bold tracking-widest text-zinc-400">Acres Supported</span>
+                        </div>
+                        <div>
+                            <span class="block text-3xl font-black border-b-2 border-gold pb-2 mb-2">98%</span>
+                            <span class="text-[9px] uppercase font-bold tracking-widest text-zinc-400">Equipment Uptime</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-32 px-8 lg:px-24 bg-white">
+            <div class="text-center mb-24">
+                <h3 class="text-4xl font-black uppercase tracking-tighter mb-4 text-forest">Mechanical Inventory</h3>
+                <p class="text-gold font-bold text-[10px] uppercase tracking-[0.5em]">High-Performance Tooling & Supplies</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
+                
+                <div class="service-card group">
+                    <div class="h-64 overflow-hidden bg-zinc-100 mb-6">
+                        <img src="img/general-supplies/mining.png" alt="Mining Equipment" class="service-image w-full h-full object-cover transition-all duration-700">
+                    </div>
+                    <div class="space-y-4">
+                        <span class="text-gold font-bold text-[10px] tracking-[0.3em] uppercase">Service 01</span>
+                        <h4 class="text-2xl font-black uppercase tracking-tighter">Industrial & Mining</h4>
+                        <p class="text-sm text-zinc-500 leading-relaxed">Essential materials and consumables for North-Western Province and regional mining operations. [cite: 7]</p>
+                        <ul class="text-[11px] space-y-2 uppercase font-bold tracking-wider text-forest/70">
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>PPE & Safety Gear [cite: 7]</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>Tools & Hardware [cite: 7]</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>Electrical & Plumbing [cite: 7]</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card group">
+                    <div class="h-64 overflow-hidden bg-zinc-100 mb-6">
+                        <img src="img/general-supplies/office.png" alt="Institutional Supplies" class="service-image w-full h-full object-cover transition-all duration-700">
+                    </div>
+                    <div class="space-y-4">
+                        <span class="text-gold font-bold text-[10px] tracking-[0.3em] uppercase">Service 02</span>
+                        <h4 class="text-2xl font-black uppercase tracking-tighter">Office & Institutional</h4>
+                        <p class="text-sm text-zinc-500 leading-relaxed">Comprehensive supply solutions for government, financial, and educational institutions. [cite: 6]</p>
+                        <ul class="text-[11px] space-y-2 uppercase font-bold tracking-wider text-forest/70">
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>ICT Equipment & Accessories [cite: 6]</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>Stationery & Consumables [cite: 6]</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>Office Furniture & Fittings [cite: 6]</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="service-card group">
+                    <div class="h-64 overflow-hidden bg-zinc-100 mb-6">
+                        <img src="img/general-supplies/food.png" alt="Bulk Food Supply" class="service-image w-full h-full object-cover transition-all duration-700">
+                    </div>
+                    <div class="space-y-4">
+                        <span class="text-gold font-bold text-[10px] tracking-[0.3em] uppercase">Service 03</span>
+                        <h4 class="text-2xl font-black uppercase tracking-tighter">Food & Beverages</h4>
+                        <p class="text-sm text-zinc-500 leading-relaxed">Structured bulk food supply solutions tailored to large-scale commercial and project needs. [cite: 9]</p>
+                        <ul class="text-[11px] space-y-2 uppercase font-bold tracking-wider text-forest/70">
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>Mealie Meal, Rice & Grains [cite: 10]</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>Customized Project Packages [cite: 10]</li>
+                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>Institutional Distribution [cite: 9]</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-forest py-24 px-8 border-t border-gold/20">
+        <div class="max-w-4xl mx-auto flex flex-col items-center text-center">
+            <h4 class="serif-brand text-4xl text-white italic mb-4">"Our Disability is not our Inability" [cite: 7]</h4>
+            <p class="text-gold/60 text-[10px] uppercase tracking-widest mb-8">Empowering African Industry & Agriculture</p>
+            <button class="bg-gold text-forest px-12 py-4 text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all">
+                Download Catalog 2026
+            </button>
+        </div>
+    </footer>
+
+</body>
+</html>
