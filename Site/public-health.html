@@ -3,200 +3,364 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="King Kayo Group - Leading public health services in Zambia.">
     <title>Public Health | King Kayo Group</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'navy-obsidian': '#050B18',
-                        'primary-green': '#042F2C',
+                        'primary-green': '#042F10',
                         'accent-gold': '#D4AF37',
-                        'soft-gold': '#E5C76B',
-                        'luxury-offwhite': '#FDFCFB'
+                        'institutional-bg': '#FFFFFF',
+                        'surface-light': '#F8F9FA'
                     },
                     fontFamily: {
-                        'serif': ['Playfair Display', 'serif'],
-                        'sans': ['Plus Jakarta Sans', 'sans-serif']
+                        'sans': ['"Plus Jakarta Sans"', 'sans-serif'],
+                        'serif': ['"Playfair Display"', 'serif'],
                     }
                 }
             }
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap');
-        :root { --forest: #042F2C; --gold: #D4AF37; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FFFFFF; color: var(--forest); }
-        h1, h2, h3, h4, .serif-brand { font-family: 'Playfair Display', serif; }
-        .bg-grid { background-image: radial-gradient(var(--forest) 0.5px, transparent 0.5px); background-size: 30px 30px; opacity: 0.05; }
+        body { scroll-behavior: smooth; background-color: #FFFFFF; color: #042F2C; }
+        
+        .hero-bg {
+    background: linear-gradient(90deg, 
+        rgba(4, 47, 16, 0.95) 0%, 
+        rgba(4, 47, 16, 0.7) 40%, 
+        transparent 100%), 
+        url('img/public-health/cleaning.png');
+    background-size: cover;
+    background-position: center;
+}
+
+        /* Smooth Section Transitions */
+        .service-section { display: none; opacity: 0; }
+        .service-section.active { 
+            display: block; 
+            animation: fadeIn 0.6s ease-out forwards; 
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Institutional Tab Styling */
+        .filter-btn { position: relative; transition: all 0.3s ease; }
+        .filter-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 0; height: 3px;
+            background: #D4AF37; transition: all 0.3s ease;
+        }
+        .filter-btn.active { color: #D4AF37; }
+        .filter-btn.active::after { width: 100%; }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .text-vertical { writing-mode: vertical-rl; }
+
+        /* Mobile Menu Animation */
+        #mobile-menu { transition: transform 0.3s ease-in-out; transform: translateX(100%); }
+        #mobile-menu.open { transform: translateX(0); }
     </style>
 </head>
-<body>
+<body class="font-sans antialiased">
 
-    <nav class="p-8 flex justify-between items-center border-b border-zinc-100">
-        <a href="index.html" class="flex items-center space-x-2 group">
-            <span class="text-gold group-hover:-translate-x-1 transition-transform">←</span>
-            <span class="text-[10px] font-black uppercase tracking-widest">Back to Group</span>
-        </a>
-        <div class="w-40 h-auto flex items-center justify-center rounded-br-xl">
-            <img src="img/kk-phs.jpg" alt="kphs">
+    <nav class="fixed top-0 w-full z-50 bg-white/100 border-b border-zinc-100 py-4 md:py-5">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center space-x-60">
+                <a href="landing.html" class="flex items-center space-x-2">
+                <span class="text-accent-gold">←</span>
+                <span class="text-[10px] font-black uppercase tracking-widest hidden sm:inline">Back to Group</span>
+            </a>
+                <img src="img/kk-phs.jpg" alt="Logo" class="h-12 md:h-20">
+                <div class="hidden md:block border-l border-zinc-200 pl-4">
+                    <span class="block text-[10px] font-extrabold uppercase tracking-[0.3em] text-primary-green">Public Health</span>
+                    <span class="block text-[8px] uppercase tracking-[0.11em] text-zinc-400">Institutional Division</span>
+                </div>
+            </div>
+            
+            <div class="hidden lg:flex items-center space-x-12 text-[10px] font-bold uppercase tracking-widest">
+                <a href="#services" class="text-primary-green hover:text-accent-gold transition-colors">Divisions</a>
+                <a href="#contact" class="text-primary-green hover:text-accent-gold transition-colors">Inquiry</a>
+                <a href="#contact" class="bg-primary-green text-white px-8 py-3 hover:bg-black transition-all">Get a Quote</a>
+            </div>
+
+            <!--`button onclick="toggleMenu()" class="lg:hidden text-primary-green focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path></svg>
+            </button-->
         </div>
     </nav>
 
-    <main>
-        <section class="flex flex-col lg:flex-row min-h-[70vh]">
-            <div class="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center">
-                <span class="text-gold text-[10px] font-black uppercase tracking-[0.5em] mb-4">Division: 01</span>
-                <h1 class="text-lg lg:text-4xl font-black mb-8 leading-none uppercase">Public Health &<br>Cleaning Services</h1>
-                <p class="text-xl text-zinc-500 leading-relaxed max-w-md">
-                    King Kayo Public Health / Cleaning Services is a disability led enterprise legally
-                    operating Zambian company delivering integrated public health, environmental,
-                    sanitation, waste management, engineering, and fabrication solutions.
-                </p>
-                <div class="mt-12 flex space-x-8">
-                    <div>
-                        <p class="text-2xl font-bold">13+</p>
-                        <p class="text-[9px] uppercase tracking-widest text-zinc-400">INDUSTRIES & CLIENTS SERVED</p>
-                    </div>
-                    <div class="w-[1px] h-12 bg-zinc-200"></div>
-                    <div>
-                        <p class="text-2xl font-bold">ZMK 50,000+</p>
-                        <p class="text-[9px] uppercase tracking-widest text-zinc-400">Annual Impact</p>
+    <!--div id="mobile-menu" class="fixed inset-0 z-[60] bg-white flex flex-col p-8 lg:hidden">
+        <div class="flex justify-end mb-12">
+            <button onclick="toggleMenu()" class="text-primary-green">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div class="flex flex-col space-y-8 text-xl font-bold uppercase tracking-tighter text-primary-green">
+            <a href="#services" onclick="toggleMenu()">Divisions</a>
+            <a href="#contact" onclick="toggleMenu()">Inquiry</a>
+            <a href="#contact" onclick="toggleMenu()" class="text-accent-gold">Get a Quote</a>
+        </div>
+    </div-->
+
+    <main class="pt-16 md:pt-20">
+        <section class="hero-bg relative min-h-[90vh] md:min-h-[80vh] flex flex-col justify-center px-6 overflow-hidden">
+            <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-9 relative z-10 py-12 md:py-0">
+                    <span class="inline-block border-l-2 border-accent-gold pl-4 text-accent-gold text-[12px] md:text-[12px] font-black tracking-[0.5em] uppercase mb-6">
+                        Division 01
+                    </span>
+                    <h1 class="text-[12vw] md:text-[8vw] lg:text-[5vw] font-extrabold leading-[0.9] text-surface-light uppercase tracking-tighter mb-8">
+                        Public Health &<br>
+                        <span class="font-serif text-accent-gold lowercase tracking-normal font-dark">Cleaning Services.</span>
+                    </h1>
+                    <p class="text-base md:text-2xl text-surface-light font-dark max-w-2xl leading-relaxed mb-10 md:mb-12">
+                        Deploying hospital-grade bio-enzyme engineering and specialized public health logistics for critical commercial environments.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 md:gap-6">
+                        <a href="#services" class="text-center bg-primary-green text-white px-8 md:px-10 py-4 md:py-5 text-[10px] font-black uppercase tracking-widest hover:shadow-2xl transition-all">Explore Divisions</a>
+                        <a href="#contact" class="text-center border border-zinc-200 bg-white/50 px-8 md:px-10 py-4 md:py-5 text-[10px] font-black uppercase tracking-widest hover:bg-primary-green hover:text-white transition-all">Technical Inquiry</a>
                     </div>
                 </div>
-            </div>
-
-            <div class="lg:w-1/2 bg-zinc-100 relative overflow-hidden min-h-[400px]">
-                <img src="img/public-health/cleaning-2.png" alt="Cleaning Operations" class="w-full h-full object-cover opacity-80 scale-110 hover:scale-100 transition-transform duration-[2000ms]">
-                <div class="absolute inset-0 bg-forest/20"></div>
             </div>
         </section>
 
-        <section id="services" class="py-32 px-6 lg:px-24 bg-white">
-    <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-24">
-            <span class="text-accent-gold text-[10px] font-bold uppercase tracking-[0.5em] mb-4 block">Our Portfolio</span>
-            <h2 class="serif-title text-4xl md:text-5xl text-primary-green">Specialized Services</h2>
-            <div class="w-20 h-1 bg-accent-gold mx-auto mt-8"></div>
-        </div>
+        <section id="services" class="sticky top-[72px] md:top-[80px] z-40 bg-white border-y border-zinc-100 shadow-sm overflow-x-auto no-scrollbar">
+            <div class="max-w-7xl mx-auto px-4 flex md:justify-center items-center">
+                <div class="flex whitespace-nowrap min-w-max">
+                    <button onclick="showService('cleaning')" class="filter-btn active px-6 md:px-8 py-6 md:py-8 text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-primary-green/60" data-target="cleaning">01 Cleaning/Laundry</button>
+                    <button onclick="showService('pest')" class="filter-btn px-6 md:px-8 py-6 md:py-8 text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-primary-green/60" data-target="pest">02 Pest/Fumigation</button>
+                    <button onclick="showService('sanitation')" class="filter-btn px-6 md:px-8 py-6 md:py-8 text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-primary-green/60" data-target="sanitation">03 Sanitation & Bio-Enzymes</button>
+                    <button onclick="showService('waste')" class="filter-btn px-6 md:px-8 py-6 md:py-8 text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-primary-green/60" data-target="waste">04 Public Health & Waste</button>
+                </div>
+            </div>
+        </section>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div class="max-w-7xl mx-auto px-6 py-20 md:py-32">
             
-            <div class="group bg-zinc-50 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500">
-                <div class="h-48 overflow-hidden relative">
-                    <img src="img/public-health/waste.jpg" alt="Waste Management" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-primary-green/20"></div>
+            <section id="cleaning" class="service-section active">
+                <div class="grid lg:grid-cols-2 gap-12 md:gap-20 items-start">
+                    <div class="space-y-8 md:space-y-12">
+                        <div class="relative">
+                            <span class="text-7xl md:text-9xl font-black text-zinc-50 absolute -top-10 md:-top-16 -left-4 md:-left-8 -z-10">01</span>
+                            <h2 class="text-3xl md:text-6xl font-extrabold text-primary-green uppercase leading-[0.85] tracking-tighter">Hygiene<br>Restoration.</h2>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-6 bg-surface-light border-t-2 border-primary-green">
+                                <h4 class="text-accent-gold text-[10px] font-black uppercase tracking-widest mb-4">Core Cleaning</h4>
+                                <ul class="text-[11px] font-bold uppercase space-y-2 text-zinc-600">
+                                    <li>• Office & House</li>
+                                    <li>• Post-Construction</li>
+                                    <li>• Windows & Glass</li>
+                                    <li>• Tiles/Wall/Ceiling</li>
+                                </ul>
+                            </div>
+                            <div class="p-6 bg-surface-light border-t-2 border-primary-green">
+                                <h4 class="text-accent-gold text-[10px] font-black uppercase tracking-widest mb-4">Fabric & Laundry</h4>
+                                <ul class="text-[11px] font-bold uppercase space-y-2 text-zinc-600">
+                                    <li>• Laundry Services</li>
+                                    <li>• Mattress Deep Clean</li>
+                                    <li>• Sofa Restoration</li>
+                                    <li>• Carpet Cleaning</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative group p-2 md:p-4 border border-zinc-100">
+                        <img src="img/public-health/cleaning-2.png" alt="Cleaning" class="w-full grayscale group-hover:grayscale-0 transition-all duration-700">
+                    </div>
                 </div>
-                <div class="p-8">
-                    <span class="text-[10px] font-bold text-accent-gold tracking-widest uppercase">Service 01</span>
-                    <h3 class="serif-title text-xl font-bold mt-2 mb-4 text-primary-green">Waste Management</h3>
-                    <p class="text-sm text-zinc-500 leading-relaxed mb-6">Efficient and compliant solutions for diverse waste streams, adhering to strict environmental laws.</p>
-                    <ul class="space-y-2 border-t border-zinc-200 pt-4">
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>Medical & Hazardous Waste</li>
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>General & Recycling Programs</li>
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>Customized Waste Plans</li>
-                    </ul>
-                </div>
-            </div>
+            </section>
 
-            <div class="group bg-zinc-50 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500">
-                <div class="h-48 overflow-hidden relative">
-                    <img src="img/public-health/fabrication.jpg" alt="Engineering" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-primary-green/20"></div>
+            <section id="pest" class="service-section">
+                <div class="grid lg:grid-cols-12 gap-6 md:gap-8">
+                    <div class="lg:col-span-5 bg-primary-green text-white p-10 md:p-16 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-3xl md:text-4xl font-extrabold uppercase tracking-tighter text-accent-gold mb-4">Vector Control</h3>
+                            <p class="text-zinc-400 text-sm font-light leading-relaxed mb-8">Scientific eradication and fumigation protocols for all biological threats.</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-[9px] font-black uppercase tracking-widest text-zinc-300">
+                            <span>• Cockroaches</span><span>• Bedbugs</span><span>• Rodents</span><span>• Bats</span>
+                            <span>• Bees / Ants</span><span>• Termites</span><span>• Snakes</span><span>• Mosquitoes</span>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="p-8 border border-zinc-100 bg-surface-light">
+                            <h4 class="text-primary-green font-black text-[10px] uppercase tracking-[0.3em] mb-4">Full Spectrum Eradication</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-y-4 text-[10px] font-bold text-zinc-500 uppercase">
+                                <span>Gecko Control</span><span>Houseflies</span><span>Flea Treatment</span>
+                                <span>Garden Pests</span><span>Heaviest Infestations</span><span>Other Insects</span>
+                            </div>
+                        </div>
+                        <div class="p-10 border border-zinc-100 flex justify-between items-center bg-white">
+                            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-primary-green">Emergency Fumigation Line</span>
+                            <span class="text-accent-gold text-xl">→</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="p-8">
-                    <span class="text-[10px] font-bold text-accent-gold tracking-widest uppercase">Service 02</span>
-                    <h3 class="serif-title text-xl font-bold mt-2 mb-4 text-primary-green">Engineering & Fabrication</h3>
-                    <p class="text-sm text-zinc-500 leading-relaxed mb-6">Expert steel works and mechanical engineering services for industrial and mining sectors.</p>
-                    <ul class="space-y-2 border-t border-zinc-200 pt-4">
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>Waste Container Design</li>
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>Trailer Manufacturing</li>
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>Skilled Technical Labour</li>
-                    </ul>
-                </div>
-            </div>
+            </section>
 
-            <div class="group bg-zinc-50 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500">
-                <div class="h-48 overflow-hidden relative">
-                    <img src="img/public-health/pest-control.png" alt="Pest Control" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-primary-green/20"></div>
+            <section id="sanitation" class="service-section">
+                <div class="grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
+                    <div class="bg-surface-light p-2 border border-zinc-200 order-2 lg:order-1">
+                        <img src="img/public-health//sanitation.png" class="w-full" alt="sanitation">
+                    </div>
+                    <div class="bg-surface-light p-2 border border-zinc-200 order-2 lg:order-1">
+                        <img src="img/public-health/pest-control.png" class="w-full" alt="sanitation">
+                    </div>
+                    <div class="space-y-8 md:space-y-12 order-1 lg:order-2">
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-primary-green uppercase leading-none tracking-tighter">Biological<br>Sanitation.</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                            <div class="space-y-4">
+                                <span class="text-accent-gold font-serif italic text-3xl block">01</span>
+                                <h4 class="font-black uppercase text-[10px] tracking-widest text-primary-green">Treatment Systems</h4>
+                                <ul class="text-[11px] text-zinc-500 font-bold uppercase space-y-2">
+                                    <li>• Bioenzyme Toilet Treatment</li>
+                                    <li>• Septic Tank Bio-Engineers</li>
+                                    <li>• Unblocking Plumbing</li>
+                                </ul>
+                            </div>
+                            <div class="space-y-4">
+                                <span class="text-accent-gold font-serif italic text-3xl block">02</span>
+                                <h4 class="font-black uppercase text-[10px] tracking-widest text-primary-green">Facility Support</h4>
+                                <ul class="text-[11px] text-zinc-500 font-bold uppercase space-y-2">
+                                    <li>• Mobile Toilet Hiring</li>
+                                    <li>• Sanitation Logistics</li>
+                                    <li>• Septic Evacuation</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="p-8">
-                    <span class="text-[10px] font-bold text-accent-gold tracking-widest uppercase">Service 03</span>
-                    <h3 class="serif-title text-xl font-bold mt-2 mb-4 text-primary-green">Pest Control & Fumigation</h3>
-                    <p class="text-sm text-zinc-500 leading-relaxed mb-6">Comprehensive protection strategies using biological and chemical methods for homes and businesses.</p>
-                    <ul class="space-y-2 border-t border-zinc-200 pt-4">
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>Inspection & Prevention</li>
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>Emergency Response</li>
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>Industrial Fumigation</li>
-                    </ul>
-                </div>
-            </div>
+            </section>
 
-            <div class="group bg-zinc-50 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500">
-                <div class="h-48 overflow-hidden relative">
-                    <img src="img/public-health/sanitation.png" alt="Sanitation" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-primary-green/20"></div>
+            <section id="waste" class="service-section">
+                <div class="bg-primary-green p-8 md:p-12 lg:p-24 text-white">
+                    <div class="max-w-6xl mx-auto">
+                        <span class="text-accent-gold text-[10px] font-black uppercase tracking-[0.4em] mb-6 block">Department of Public Health</span>
+                        <h2 class="text-2xl md:text-5xl font-extrabold uppercase mb-12 tracking-tighter">Institutional Waste<br>& Supply.</h2>
+                        
+                        <div class="grid md:grid-cols-3 gap-12">
+                            <div class="space-y-6 border-l border-zinc-700 pl-8">
+                                <h4 class="text-accent-gold text-[10px] font-black uppercase tracking-widest">Management</h4>
+                                <ul class="text-[10px] uppercase font-bold tracking-widest space-y-3">
+                                    <li>• Medical Waste Disposal</li>
+                                    <li>• Solid Waste Management</li>
+                                    <li>• Hazardous Waste Control</li>
+                                    <li>• Waste Transportation</li>
+                                </ul>
+                            </div>
+                            <div class="space-y-6 border-l border-zinc-700 pl-8">
+                                <h4 class="text-accent-gold text-[10px] font-black uppercase tracking-widest">Supply Chain</h4>
+                                <ul class="text-[10px] uppercase font-bold tracking-widest space-y-3">
+                                    <li>• Skip Bin Supply</li>
+                                    <li>• Wheelie Bin Supply</li>
+                                    <li>• Sanitary Bin Supply</li>
+                                    <li>• Cleaning Materials</li>
+                                </ul>
+                            </div>
+                            <div class="space-y-6 border-l border-zinc-700 pl-8">
+                                <h4 class="text-accent-gold text-[10px] font-black uppercase tracking-widest">Environment</h4>
+                                <ul class="text-[10px] uppercase font-bold tracking-widest space-y-3">
+                                    <li>• Industrial Landscaping</li>
+                                    <li>• Site Clearance</li>
+                                    <li>• Subscriber Collections</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="p-8">
-                    <span class="text-[10px] font-bold text-accent-gold tracking-widest uppercase">Service 04</span>
-                    <h3 class="serif-title text-xl font-bold mt-2 mb-4 text-primary-green">Sanitation Services</h3>
-                    <p class="text-sm text-zinc-500 leading-relaxed mb-6">Hygiene-focused management including pit latrine treatment and mobile sanitation hire.</p>
-                    <ul class="space-y-2 border-t border-zinc-200 pt-4">
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>Pit Latrine Dislodging</li>
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>Mobile Toilet Hire</li>
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>Hygiene Material Supply</li>
-                    </ul>
-                </div>
-            </div>
+                <div class="bg-surface-light p-2 border border-zinc-200 order-2 lg:order-1">
+                        <img src="img/public-health/waste.jpg" class="w-full" alt="sanitation">
+                    </div>
+            </section>
 
-            <div class="group bg-zinc-50 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500">
-                <div class="h-48 overflow-hidden relative">
-                    <img src="img/public-health/cleaning.png" alt="Cleaning" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-primary-green/20"></div>
-                </div>
-                <div class="p-8">
-                    <span class="text-[10px] font-bold text-accent-gold tracking-widest uppercase">Service 05</span>
-                    <h3 class="serif-title text-xl font-bold mt-2 mb-4 text-primary-green">Cleaning & Sanitary</h3>
-                    <p class="text-sm text-zinc-500 leading-relaxed mb-6">Elite cleaning for commercial, residential, and industrial spaces with specialized rapid response.</p>
-                    <ul class="space-y-2 border-t border-zinc-200 pt-4">
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>Office & Residential</li>
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>Post-Construction Cleans</li>
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>Emergency Spillage Control</li>
-                    </ul>
-                </div>
-            </div>
+        </div>
+    </main>
 
-            <div class="group bg-zinc-50 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500">
-                <div class="h-48 overflow-hidden relative">
-                    <img src="img/public-health/laundry.png" alt="Laundry" class="w-full h-full object-cover transition-all duration-700">
-                    <div class="absolute inset-0 bg-primary-green/20"></div>
+<section class="bg-zinc-50 py-24 md:py-32 border-t border-zinc-200">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-20">
+                    <span class="text-accent-gold text-[10px] font-black uppercase tracking-[0.5em] block mb-4">Corporate Intelligence</span>
+                    <h2 class="text-5xl md:text-7xl font-extrabold text-primary-green uppercase tracking-tighter mb-8">Execution &<br>Proven Impact.</h2>
+                    <p class="max-w-2xl text-zinc-500 font-light text-lg leading-relaxed">
+                        Beyond service delivery, King Kayo Group operates as a strategic partner in public health. From national-scale industrial cleaning to specialized medical waste logistics, our portfolio reflects a legacy of precision and safety.
+                    </p>
                 </div>
-                <div class="p-8">
-                    <span class="text-[10px] font-bold text-accent-gold tracking-widest uppercase">Service 06</span>
-                    <h3 class="serif-title text-xl font-bold mt-2 mb-4 text-primary-green">Laundry Solutions</h3>
-                    <p class="text-sm text-zinc-500 leading-relaxed mb-6">Professional washing and folding services for communities, campuses, and disaster relief.</p>
-                    <ul class="space-y-2 border-t border-zinc-200 pt-4">
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>On-Site Mobile Laundry</li>
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>Campus Laundry Facilitation</li>
-                        <li class="text-[10px] font-bold uppercase tracking-wider flex items-center"><span class="w-1.5 h-1.5 bg-accent-gold rounded-full mr-2"></span>Off-Site Facility Management</li>
-                    </ul>
-                </div>
-            </div>
 
+                <div class="grid lg:grid-cols-3 gap-8">
+                    
+                    <div class="lg:col-span-1 bg-white p-10 border border-zinc-200 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-primary-green font-black text-[12px] uppercase tracking-widest mb-6">Portfolio</h4>
+                            <p class="text-zinc-500 text-sm leading-relaxed mb-6">
+                                Founded on the principles of bio-security and institutional integrity, King Kayo Group has grown from a specialized cleaning unit into a multi-divisional public health powerhouse in Zambia.
+                            </p>
+                        </div>
+                        <div class="pt-8 border-t border-zinc-100">
+                            <span class="text-4xl font-serif italic text-accent-gold">5+</span>
+                            <span class="block text-[9px] font-black uppercase tracking-widest text-zinc-400 mt-2">Years of Combined Expertise</span>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-1 relative h-[400px] lg:h-full overflow-hidden group">
+ <video id="corpVideo" controls class="w-full h-full object-cover z-0" poster="img/project.jpg">
+        <source src="img/youth-day-march.mp4" type="video/mp4">
+    </video>
+    <div id="videoOverlay" class="absolute inset-0 bg-black/40 z-10 group-hover:bg-black/20 transition-all duration-700 pointer-events-none">
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-white">
+            <div class="w-20 h-20 border border-white/30 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform">
+                <div class="w-0 h-0 border-t-[10px] border-t-transparent border-l-[18px] border-l-white border-b-[10px] border-b-transparent ml-2"></div>
+            </div>
+            <span class="mt-6 text-[10px] font-black uppercase tracking-[0.4em]">Watch Operational Excellence</span>
         </div>
     </div>
-</section>
-    </main>
+                        <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent text-white">
+                            <p class="font-bold text-sm uppercase">Youth day</p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-1 space-y-8">
+                        <div class="bg-primary-green p-10 text-white">
+                            <h4 class="text-accent-gold text-[10px] font-black uppercase tracking-widest mb-8">Capacity Metrics</h4>
+                            <div class="space-y-6">
+                                <div>
+                                    <span class="block text-3xl font-bold tracking-tighter">500+ Liters</span>
+                                    <span class="text-[9px] uppercase tracking-widest text-zinc-400">Monthly Septic Management</span>
+                                </div>
+                                <div>
+                                    <span class="block text-3xl font-bold tracking-tighter">100% ISO</span>
+                                    <span class="text-[9px] uppercase tracking-widest text-zinc-400">Waste Disposal Compliance</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-accent-gold p-10 text-primary-green">
+                            <h4 class="font-black text-[10px] uppercase tracking-widest mb-4">Partner Protocol</h4>
+                            <p class="text-sm font-bold leading-tight uppercase">Join the network of institutional partners securing Zambia's public health.</p>
+                            <a href="#contact" class="inline-block mt-6 text-[10px] font-black border-b-2 border-primary-green pb-1 hover:text-white hover:border-white transition-all uppercase">Download Profile →</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
 
     <section id="contact" class="py-32 bg-luxury-offwhite border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-20 items-center">
                 
                 <div class="reveal">
-                    <h2 class="serif-title text-4xl md:text-5xl text-navy-obsidian leading-tight mb-8">
-                        Reach us for your <br><span class="italic text-primary-green">Desired Service.</span>
+                    <h2 class="serif-title text-4xl md:text-5xl text-primary-green leading-tight mb-8">
+                        Reach us for your <br><span class="italic text-accent-gold">Desired Service.</span>
                     </h2>
                     
                     <div class="space-y-8">
@@ -223,16 +387,16 @@
                 </div>
 
                 <div class="reveal" style="transition-delay: 0.2s;">
-                    <div class="bg-navy-obsidian rounded-[3rem] p-12 md:p-16 text-center relative overflow-hidden shadow-2xl">
+                    <div class="bg-primary-green rounded-[3rem] p-12 md:p-16 text-center relative overflow-hidden shadow-2xl">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-accent-gold/5 rounded-full -mr-16 -mt-16"></div>
                         
                         <div class="relative z-10">
-                            <h3 class="serif-title text-3xl text-white mb-6">Which <span class="italic text-soft-gold">Service</span> do you need?</h3>
+                            <h3 class="serif-title text-3xl text-white mb-6">Which <span class="italic text-accent-gold">Service</span> do you need?</h3>
                             <p class="text-slate-400 text-sm mb-10 leading-relaxed">
                                 Complete our formal inquiry brief to ensure your request is routed to the appropriate division lead.
                             </p>
                             
-                            <a href="index.php" class="inline-block w-full py-5 bg-accent-gold text-navy-obsidian text-[10px] font-black uppercase tracking-[0.4em] rounded-2xl hover:bg-white transition-all duration-300 shadow-xl shadow-accent-gold/10">
+                            <a href="index.php" class="inline-block w-full py-5 bg-accent-gold text-primary-green text-[10px] font-black uppercase tracking-[0.4em] rounded-2xl hover:bg-white transition-all duration-300 shadow-xl shadow-accent-gold/10">
                                 Open Service Form
                             </a>
                             
@@ -247,21 +411,21 @@
         </div>
     </section>
 
-    <footer class="bg-navy-obsidian text-white py-20 px-6 border-t border-white/5">
+    <footer class="bg-primary-green text-white py-20 px-6 border-t border-white/5">
         <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
             <div class="col-span-2">
                 <div class="flex items-center space-x-3 mb-8">
                     <div class="w-8 h-8 bg-accent-gold rounded-sm flex items-center justify-center">
-                        <span class="text-navy-obsidian font-serif font-bold">K</span>
+                        <span class="text-primary-green font-serif font-bold">K</span>
                     </div>
                     <h3 class="serif-title text-2xl font-bold">King Kayo Group</h3>
                 </div>
-                <p class="text-slate-400 max-w-sm mb-8 leading-relaxed text-sm">
+                <p class="text-surface-light max-w-sm mb-8 leading-relaxed text-sm">
                     King Kayo Group is a disability-led institutional powerhouse driving sustainable commercial success and inclusivity.
                 </p>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] uppercase tracking-widest text-slate-500">
+        <div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] uppercase tracking-widest text-surface-light">
             <p>© 2026 King Kayo Group of Companies. All Rights Reserved.</p>
             <div class="flex space-x-8 mt-4 md:mt-0">
                 <a href="#" class="hover:text-white">Privacy</a>
@@ -270,5 +434,44 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        /*function toggleMenu() {
+            document.getElementById('mobile-menu').classList.toggle('open');
+        }*/
+
+        function showService(id) {
+            document.querySelectorAll('.service-section').forEach(s => s.classList.remove('active'));
+            const target = document.getElementById(id);
+            if(target) target.classList.add('active');
+
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('active');
+                if(b.dataset.target === id) b.classList.add('active');
+            });
+
+            // Adjusted scroll offset for mobile nav height
+            const navHeight = window.innerWidth < 768 ? 72 : 80;
+            window.scrollTo({
+                top: document.getElementById('services').offsetTop - navHeight,
+                behavior: 'smooth'
+            });
+
+            const video = document.getElementById('corpVideo');
+    const overlay = document.getElementById('videoOverlay');
+
+    video.addEventListener('play', () => {
+        overlay.classList.add('opacity-0');
+        // Optional: totally remove after fade
+        setTimeout(() => overlay.style.display = 'none', 700);
+    });
+
+    video.addEventListener('pause', () => {
+        overlay.style.display = 'block';
+        setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+    });
+
+        }
+    </script>
 </body>
 </html>
