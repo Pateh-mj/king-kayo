@@ -5,157 +5,310 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>General Supplies | King Kayo Group</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'navy-obsidian': '#050B18',
                         'primary-green': '#042F2C',
                         'accent-gold': '#D4AF37',
-                        'soft-gold': '#E5C76B',
-                        'luxury-offwhite': '#FDFCFB'
+                        'luxury-offwhite': '#FDFCFB',
+                        'navy-obsidian': '#0A1A1B',
                     },
-                    fontFamily: {
-                        'serif': ['Playfair Display', 'serif'],
-                        'sans': ['Plus Jakarta Sans', 'sans-serif']
+                    fontFamily: { 'sans': ['Inter', 'sans-serif'] },
+                    animation: { 'fade-in': 'fadeIn 0.5s ease-in-out', 'slide-up': 'slideUp 0.6s ease-out' },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: { '0%': { transform: 'translateY(30px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
                     }
                 }
             }
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap');
-        :root { --forest: #042F2C; --gold: #D4AF37; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FFFFFF; color: var(--forest); }
-        h1, h2, h3, .serif-brand { font-family: 'Playfair Display', serif; }
-        
-        .grain { position: relative; }
-        .grain::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            width: 100%; height: 100%;
-            background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
-            opacity: 0.03;
-            pointer-events: none;
+        .service-section { display: none; }
+        .service-section.active { display: block; animation: fadeIn 0.6s ease-in-out; }
+        .nav-link.active { color: #D4AF37; position: relative; }
+        .nav-link.active::after {
+            content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%);
+            width: 20px; height: 2px; background: #D4AF37; border-radius: 1px;
         }
-
-        .service-card:hover .service-image { transform: scale(1.05); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .hero-bg {
+            background: linear-gradient(to right, rgba(255,255,255,0.9) 30%, rgba(253,125,25,0.4) 100%), 
+                        url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover; background-position: center;
+        }
     </style>
 </head>
-<body class="grain">
+<body class="bg-white text-primary-green">
 
-    <nav class="p-8 flex justify-between items-center border-b border-zinc-100 sticky top-0 bg-white/95 backdrop-blur-sm z-50">
-        <a href="index.html" class="flex items-center space-x-2 group">
-            <span class="text-gold group-hover:-translate-x-1 transition-transform">←</span>
-            <span class="text-[10px] font-black uppercase tracking-widest text-forest">Back to Group</span>
-        </a>
-        <div class="serif-brand text-xl font-black text-forest">
-            <img src="img/general-supplies/kk-gs.png" alt="">
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-zinc-100">
+        <div class="p-4 md:p-6 flex justify-between items-center">
+            <a href="landing.html" class="flex items-center space-x-2">
+                <span class="text-accent-gold">←</span>
+                <span class="text-[10px] font-black uppercase tracking-widest hidden sm:inline">Back to Group</span>
+            </a>
+            <div class="w-24 md:w-32">
+                <img src="img/general-supplies/kk-gs.png" alt="King Kayo GS" class="w-full">
+            </div>
+            <div class="hidden lg:flex space-x-8 text-[11px] font-bold uppercase tracking-widest">
+                <button onclick="showService('food', this)" class="nav-link active">Food Items</button>
+                <button onclick="showService('agro', this)" class="nav-link active">Agro & Food</button>
+                <button onclick="showService('office', this)" class="nav-link">Institutional</button>
+                <button onclick="showService('mining', this)" class="nav-link">Industrial</button>
+                <button onclick="showService('health', this)" class="nav-link">Medical & Lab</button>
+                <button onclick="showService('heavy', this)" class="nav-link">Heavy Logistics</button>
+                <button onclick="showService('waste', this)" class="nav-link">Waste</button>
+            </div>
+            <div class="lg:hidden w-6"></div>
+        </div>
+
+        <div class="lg:hidden flex space-x-6 overflow-x-auto px-6 pb-4 no-scrollbar text-[10px] font-bold uppercase tracking-widest border-t border-zinc-50 pt-4">
+            <button onclick="showService('food', this)" class="nav-link whitespace-nowrap active">Food Items</button>
+            <button onclick="showService('agro', this)" class="nav-link whitespace-nowrap active">Agro Stuff</button>
+            <button onclick="showService('office', this)" class="nav-link whitespace-nowrap">Institutional</button>
+            <button onclick="showService('mining', this)" class="nav-link whitespace-nowrap">Industrial</button>
+            <button onclick="showService('health', this)" class="nav-link whitespace-nowrap">Medical & Lab</button>
+            <button onclick="showService('heavy', this)" class="nav-link whitespace-nowrap">Heavy Logistics</button>
+            <button onclick="showService('waste', this)" class="nav-link whitespace-nowrap">Waste</button>
         </div>
     </nav>
 
     <main>
-        <section class="flex flex-col lg:flex-row min-h-[85vh]">
-            <div class="lg:w-1/2 relative overflow-hidden bg-forest">
-                <img src="img/general-supplies/General-Order-Supplies.jpg" alt="General Order Supplies" class="w-full h-full object-cover brightness-50">
-                <div class="absolute inset-0 flex items-center justify-center p-12 text-center">
-                     <div class="border border-gold/30 p-10 backdrop-blur-sm">
-                        <p class="text-white text-[10px] font-black uppercase tracking-[0.5em] mb-4">Division: 03</p>
-                        <h1 class="text-white text-5xl lg:text-7xl font-black uppercase tracking-tighter leading-none">
-                        General Supplies
-                        </h1>
-                     </div>
-                </div>
-            </div>
-
-            <div class="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center bg-[#FBFBFB]">
-                <div class="max-w-md">
-                    <h2 class="text-gold font-black text-[11px] uppercase tracking-[0.4em] mb-6">For All Your Commercial Supplies.</h2>
-                    <p class="text-2xl lg:text-4xl font-light text-forest leading-tight mb-8">
-                        Our Disability is not our Inability
-                    </p>
-                    <p class="text-zinc-500 text-sm leading-relaxed mb-12">
-                                KING KAYO GENERAL SUPPLIES LIMITED is a 100% locally owned Zambian
-                                company and a proudly disability-led enterprise operating as a subsidiary of
-                                KING KAYO GROUP OF COMPANIES. The company was established to provide
-                                reliable, efficient, and cost-effective general supply and procurement solutions
-                                to public, private, and commercial institutions across Zambia.
-                    </p>
-                    
-                    <div class="grid grid-cols-2 gap-12">
-                        <div>
-                            <span class="block text-3xl font-black border-b-2 border-gold pb-2 mb-2">45k+</span>
-                            <span class="text-[9px] uppercase font-bold tracking-widest text-zinc-400">Acres Supported</span>
-                        </div>
-                        <div>
-                            <span class="block text-3xl font-black border-b-2 border-gold pb-2 mb-2">98%</span>
-                            <span class="text-[9px] uppercase font-bold tracking-widest text-zinc-400">Equipment Uptime</span>
-                        </div>
-                    </div>
-                </div>
+        <section class="hero-bg h-[60vh] flex flex-col justify-center px-6 md:px-24">
+            <div class="border-l-4 border-accent-gold pl-6 animate-slide-up">
+                <p class="text-accent-gold text-[12px] font-black uppercase tracking-[0.5em] mb-4">Division: 03</p>
+                <h1 class="font-black text-[10vw] md:text-[6vw] leading-[0.9] uppercase tracking-tighter">
+                    General <br><span class="italic text-accent-gold">Supplies.</span>
+                </h1>
             </div>
         </section>
 
-        <section class="py-32 px-8 lg:px-24 bg-white">
-            <div class="text-center mb-24">
-                <h3 class="text-4xl font-black uppercase tracking-tighter mb-4 text-forest">General Supply</h3>
-                <p class="text-gold font-bold text-[10px] uppercase tracking-[0.5em]">Vast Inventory, Accessories and Groceries</p>
+        <div id="food" class="service-section active py-20 px-6 md:px-24">
+            <div class="grid lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-8 bg-zinc-50 rounded-[3rem] p-8 md:p-16">
+                    <span class="text-accent-gold text-[10px] font-black tracking-[0.4em] uppercase">Division 01</span>
+                    <h2 class="font-bold text-4xl md:text-5xl my-8">Food Security</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-12">
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Assorted Foods</span>
+                        </div>
+                        <img src="img/general-supplies/food.png" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-12">
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Assorted Beverages</span>
+                        </div>
+                        <img src="https://thumbs.dreamstime.com/b/shah-alam-malaysia-september-line-row-variety-choices-carbonated-soft-drinks-supermarket-display-sell-198080063.jpg?w=768" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-12">
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Cereal</span>
+                        </div>
+                    </div>
+                    <img src="img/general-supplies/store.png" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+                </div>
+                <div class="lg:col-span-4 bg-primary-green rounded-[3rem] p-10 text-white self-start">
+                    <h3 class="text-accent-gold font-bold text-xl mb-6">Edibility Satisfaction</h3>
+                    <p class="text-sm text-white/70 leading-relaxed mb-8">Ensuring assorted food supply and availability for all that households and food reserves need.</p>
+                    <div class="text-4xl font-black">95+</div>
+                    <div class="text-[9px] uppercase tracking-widest text-white/50">Tons Distributed</div>
+                </div>
             </div>
+        </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
-                
-                <div class="service-card group">
-                    <div class="h-64 overflow-hidden bg-zinc-100 mb-6">
-                        <img src="img/general-supplies/mining.png" alt="Mining Equipment" class="service-image w-full h-full object-cover transition-all duration-700">
+        <div id="agro" class="service-section py-20 px-6 md:px-24">
+            <div class="grid lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-8 bg-zinc-50 rounded-[3rem] p-8 md:p-16">
+                    <span class="text-accent-gold text-[10px] font-black tracking-[0.4em] uppercase">Division 02</span>
+                    <h2 class="font-bold text-4xl md:text-5xl my-8">Agriculture</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-12">
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Agricultural Equipment</span>
+                        </div>
+                        <img src="https://kj1bcdn.b-cdn.net/media/37182/machine.png" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Oxcarts</span>
+                        </div>
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.eCB7uVIi1hdmUXgaCa7N1gHaFG?rs=1&pid=ImgDetMain&o=7&rm=3" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Cattle Cage</span>
+                        </div>
                     </div>
-                    <div class="space-y-4">
-                        <span class="text-gold font-bold text-[10px] tracking-[0.3em] uppercase">Service 01</span>
-                        <h4 class="text-2xl font-black uppercase tracking-tighter">Industrial & Mining</h4>
-                        <p class="text-sm text-zinc-500 leading-relaxed">Essential materials and consumables for North-Western Province and regional mining operations.</p>
-                        <ul class="text-[11px] space-y-2 uppercase font-bold tracking-wider text-forest/70">
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>PPE & Safety Gear</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>Tools & Hardware</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>Electrical & Plumbing</li>
-                        </ul>
-                    </div>
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.T0vpMR5mVXDfShiL7vQ-vgHaFj?rs=1&pid=ImgDetMain&o=7&rm=3" class="w-full h-80 object-cover rounded-2xl shadow-xl">
                 </div>
-
-                <div class="service-card group">
-                    <div class="h-64 overflow-hidden bg-zinc-100 mb-6">
-                        <img src="img/general-supplies/office.png" alt="Institutional Supplies" class="service-image w-full h-full object-cover transition-all duration-700">
-                    </div>
-                    <div class="space-y-4">
-                        <span class="text-gold font-bold text-[10px] tracking-[0.3em] uppercase">Service 02</span>
-                        <h4 class="text-2xl font-black uppercase tracking-tighter">Office & Institutional</h4>
-                        <p class="text-sm text-zinc-500 leading-relaxed">Comprehensive supply solutions for government, financial, and educational institutions.</p>
-                        <ul class="text-[11px] space-y-2 uppercase font-bold tracking-wider text-forest/70">
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>ICT Equipment & Accessories</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>Stationery & Consumables</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>Office Furniture & Fittings</li>
-                        </ul>
-                    </div>
+                <div class="lg:col-span-4 bg-primary-green rounded-[3rem] p-10 text-white self-start">
+                    <h3 class="text-accent-gold font-bold text-xl mb-6">Agro Reach</h3>
+                    <p class="text-sm text-white/70 leading-relaxed mb-8">Empowering Zambian farmers and ensuring consistent food supply chains for large-scale institutions.</p>
+                    <div class="text-4xl font-black">45k+</div>
+                    <div class="text-[9px] uppercase tracking-widest text-white/50">Tons Distributed</div>
                 </div>
-
-                <div class="service-card group">
-                    <div class="h-64 overflow-hidden bg-zinc-100 mb-6">
-                        <img src="img/general-supplies/food.png" alt="Bulk Food Supply" class="service-image w-full h-full object-cover transition-all duration-700">
-                    </div>
-                    <div class="space-y-4">
-                        <span class="text-gold font-bold text-[10px] tracking-[0.3em] uppercase">Service 03</span>
-                        <h4 class="text-2xl font-black uppercase tracking-tighter">Food & Beverages</h4>
-                        <p class="text-sm text-zinc-500 leading-relaxed">Structured bulk food supply solutions tailored to large-scale commercial and project needs.</p>
-                        <ul class="text-[11px] space-y-2 uppercase font-bold tracking-wider text-forest/70">
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>Mealie Meal, Rice & Grains</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>Customized Project Packages</li>
-                            <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-3"></span>Institutional Distribution</li>
-                        </ul>
-                    </div>
-                </div>
-
             </div>
-        </section>
+        </div>
+
+        <div id="office" class="service-section py-20 px-6 md:px-24">
+            <div class="grid lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-8 bg-zinc-50 rounded-[3rem] p-8 md:p-16">
+                    <span class="text-accent-gold text-[10px] font-black tracking-[0.4em] uppercase">Division 02</span>
+                    <h2 class="font-bold text-4xl md:text-5xl my-8">Office & Stationery</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-12">
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Stationery</span>
+                        </div>
+                        <img src="https://th.bing.com/th/id/R.80e20f70b3bd8ba9b789e88f59335d02?rik=ECk1XX2%2fuZ2H1w&pid=ImgRaw&r=0" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Office Desks</span>
+                        </div>
+                        <img src="img/general-supplies/office.png" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">General Furniture</span>
+                        </div>
+                    </div>
+                    <img src="img/general-supplies/furniture.jpg" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+                </div>
+                <div class="lg:col-span-4 bg-primary-green rounded-[3rem] p-10 text-white self-start">
+                    <h3 class="text-accent-gold font-bold text-xl mb-6">Smart Spaces</h3>
+                    <p class="text-sm text-white/70 leading-relaxed">End-to-end office fit-outs and supply management for corporate and government headquarters.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="mining" class="service-section py-20 px-6 md:px-24">
+            <div class="grid lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-8 bg-zinc-50 rounded-[3rem] p-8 md:p-16">
+                    <span class="text-accent-gold text-[10px] font-black tracking-[0.4em] uppercase">Division 03</span>
+                    <h2 class="font-bold text-4xl md:text-5xl my-8">Industrial & Construction</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-12">
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Mining Materials</span>
+                        </div>
+                    <img src="img/general-supplies/mining.png" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Building Materials</span>
+                        </div>
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.DH5K17HGfoQK-r8ZHDh2hwHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Accessories and Tools</span>
+                        </div>
+                    </div>
+                    <img src="img/general-supplies/tools.png" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+                </div>
+                <div class="lg:col-span-4 bg-primary-green rounded-[3rem] p-10 text-white self-start">
+                    <h3 class="text-accent-gold font-bold text-xl mb-6">Heavy Industry</h3>
+                    <p class="text-sm text-white/70 leading-relaxed">Providing high-grade components for Zambia's essential mining and infrastructure sectors.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="health" class="service-section py-20 px-6 md:px-24">
+            <div class="grid lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-8 bg-zinc-50 rounded-[3rem] p-8 md:p-16">
+                    <span class="text-accent-gold text-[10px] font-black tracking-[0.4em] uppercase">Division 04</span>
+                    <h2 class="font-bold text-4xl md:text-5xl my-8">Healthcare & Science</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-12">
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Laboratory Equipment</span>
+                        </div>
+                    <img src="https://www.scinteck.com/uploads/1/9/7/6/19761741/s535115837287589659_c216_i2_w640.jpeg" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Medical Equipment</span>
+                        </div>
+                    </div>
+                    <img src="https://th.bing.com/th/id/R.f0385b98c7c4d58b23c5c993f25e9b1b?rik=zZSL83jsZ6UFvg&riu=http%3a%2f%2fwww.ricevillagemedsupply.com%2fuploads%2f1%2f2%2f6%2f7%2f126756613%2fscreen-shot-2020-10-13-at-8-34-12-am_orig.png&ehk=snw8VjS0pqttzBevi5F7MTAcTQLDRGdK5mE977abaG0%3d&risl=&pid=ImgRaw&r=0" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+                </div>
+                <div class="lg:col-span-4 bg-primary-green rounded-[3rem] p-10 text-white self-start">
+                    <h3 class="text-accent-gold font-bold text-xl mb-6">Safety Standards</h3>
+                    <p class="text-sm text-white/70 leading-relaxed">Supply chains for certified medical and scientific diagnostics equipment.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="heavy" class="service-section py-20 px-6 md:px-24">
+            <div class="grid lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-8 bg-zinc-50 rounded-[3rem] p-8 md:p-16">
+                    <span class="text-accent-gold text-[10px] font-black tracking-[0.4em] uppercase">Division 05</span>
+                    <h2 class="font-bold text-4xl md:text-5xl my-8">Heavy Logistics Equipment</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-12">
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Water Bowser</span>
+                        </div>
+                    <img src="https://5.imimg.com/data5/SELLER/Default/2023/3/294276221/AF/YW/AH/121045268/diesel-bowser-1000x1000.png" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Trailers</span>
+                        </div>
+                    <img src="img/general-supplies/fleet.jpg" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Fuel Tank Supply</span>
+                        </div>
+                    </div>
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.SRf4jUwpGXq0AFFKA8mXewAAAA?w=400&h=400&rs=1&pid=ImgDetMain&o=7&rm=3" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+                </div>
+                <div class="lg:col-span-4 bg-primary-green rounded-[3rem] p-10 text-white self-start">
+                    <h3 class="text-accent-gold font-bold text-xl mb-6">Transport Assets</h3>
+                    <p class="text-sm text-white/70 leading-relaxed">Providing high-capacity mobility solutions for remote and industrial projects.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="waste" class="service-section py-20 px-6 md:px-24">
+            <div class="grid lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-8 bg-zinc-50 rounded-[3rem] p-8 md:p-16">
+                    <span class="text-accent-gold text-[10px] font-black tracking-[0.4em] uppercase">Division 06</span>
+                    <h2 class="font-bold text-4xl md:text-5xl my-8">Waste Management Assets</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-12">
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Skip Bins</span>
+                        </div>
+                    </div>
+                    <img src="img/general-supplies/clean.jpg" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+<br><br>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-12">
+
+                        <div class="flex items-center space-x-4 border-b border-zinc-200 pb-4">
+                            <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Hook Bins</span>
+                        </div>
+                    </div>
+                    <img src="https://www.bincorpequip.com.au/wp-content/uploads/2024/12/hook2.jpg" class="w-full h-80 object-cover rounded-2xl shadow-xl">
+                </div>
+                <div class="lg:col-span-4 bg-primary-green rounded-[3rem] p-10 text-white self-start">
+                    <h3 class="text-accent-gold font-bold text-xl mb-6">Sanitation Support</h3>
+                    <p class="text-sm text-white/70 leading-relaxed">Industrial-grade waste collection assets for urban and industrial hygiene.</p>
+                </div>
+            </div>
+        </div>
     </main>
 
     <section id="contact" class="py-32 bg-luxury-offwhite border-t border-slate-100">
@@ -214,8 +367,8 @@
             </div>
         </div>
     </section>
-
-       <footer class="bg-navy-obsidian text-white py-20 px-6 border-t border-white/5">
+    
+     <footer class="bg-navy-obsidian text-white py-20 px-6 border-t border-white/5">
         <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
             <div class="col-span-2">
                 <div class="flex items-center space-x-3 mb-8">
@@ -239,5 +392,21 @@
         </div>
     </footer>
 
+    <script>
+        function showService(id, btn) {
+            document.querySelectorAll('.service-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            
+            document.getElementById(id).classList.add('active');
+            
+            // Activate all nav buttons matching this category (mobile + desktop)
+            const catName = btn.innerText.trim();
+            document.querySelectorAll('.nav-link').forEach(l => {
+                if(l.innerText.trim() === catName) l.classList.add('active');
+            });
+
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
 </body>
 </html>
