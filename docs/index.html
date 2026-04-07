@@ -44,12 +44,21 @@
             }
         }
         
-        /* Custom Header Transition Logic */
         #site-header.scrolled { @apply -translate-y-4 shadow-xl; }
         #site-header.scrolled .king-kayo-seal { @apply w-12 h-12 translate-y-4; }
         #site-header.scrolled .seal-letter { @apply text-lg; }
         #site-header.scrolled .seal-tag { @apply hidden; }
         #site-header.scrolled .nav-wrap { @apply bg-transparent border-none; }
+
+        /* Smooth Accordion helper */
+        .mobile-sub-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mobile-sub-menu.open {
+            max-height: 2000px; /* Large enough for content */
+        }
     </style>
 </head>
 <body class="font-sans text-navy-obsidian bg-white selection:bg-accent-gold/30">
@@ -87,11 +96,9 @@
                                     <h5 class="text-navy-obsidian font-serif text-lg">Public Health & Cleaning</h5>
                                 </div>
                                 <ul class="space-y-3">
-                                    <li><a href="#public-health" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Professional Cleaning (Office, House, Sofa)</a></li>
-                                    <li><a href="#public-health" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Sanitation & Mobile Toilet Hiring</a></li>
-                                    <li><a href="#public-health" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Medical & Solid Waste Management</a></li>
+                                    <li><a href="#public-health" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Cleaning & Sanitation</a></li>
                                     <li><a href="#public-health" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Pest Control & Fumigation</a></li>
-                                    <li><a href="#public-health" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Bioenzyme Septic Treatment</a></li>
+                                    <li><a href="#public-health" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Medical Waste Management</a></li>
                                 </ul>
                             </div>
 
@@ -101,11 +108,9 @@
                                     <h5 class="text-navy-obsidian font-serif text-lg">General Supplies</h5>
                                 </div>
                                 <ul class="space-y-3">
-                                    <li><a href="#general-supplies" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Mining & Industrial Materials</a></li>
+                                    <li><a href="#general-supplies" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Mining & Construction Materials</a></li>
                                     <li><a href="#general-supplies" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Medical & Lab Equipment</a></li>
-                                    <li><a href="#general-supplies" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Construction & Building Materials</a></li>
-                                    <li><a href="#general-supplies" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Agricultural Equipment & Trailers</a></li>
-                                    <li><a href="#general-supplies" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Corporate Stationery & Furniture</a></li>
+                                    <li><a href="#general-supplies" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Agricultural Equipment</a></li>
                                 </ul>
                             </div>
 
@@ -115,69 +120,66 @@
                                     <h5 class="text-navy-obsidian font-serif text-lg">Engineering & Logistics</h5>
                                 </div>
                                 <ul class="space-y-3">
-                                    <li><a href="#engineering" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Civil Construction (Hospitals, Schools)</a></li>
-                                    <li><a href="#engineering" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Industrial Fabrication & Welding</a></li>
-                                    <li><a href="#engineering" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Heavy Duty Transport & Trucks</a></li>
-                                    <li><a href="#engineering" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Logistics & Personnel Moving</a></li>
-                                    <li><a href="#engineering" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Mechanical Plant Maintenance</a></li>
+                                    <li><a href="#engineering" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Civil Construction</a></li>
+                                    <li><a href="#engineering" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Industrial Fabrication</a></li>
+                                    <li><a href="#engineering" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Logistics & Personnel</a></li>
                                 </ul>
                             </div>
-
-                        </div>
-                        
-                        <div class="bg-navy-obsidian px-8 py-3 flex justify-between items-center">
-                            <span class="text-[10px] text-slate-400 uppercase tracking-[0.4em]">Accredited Nationwide Operations</span>
-                            <a href="#contact" class="text-[10px] text-accent-gold uppercase tracking-[0.4em] font-bold hover:underline">Request a Quote →</a>
                         </div>
                     </div>
                 </li>
-            <li><a href="#impact" class="block px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-[0.2em] hover:text-navy-obsidian transition-colors">Impact</a></li>
+                <li><a href="#impact" class="block px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-[0.2em] hover:text-navy-obsidian transition-colors">Impact</a></li>
                 <li><a href="#contact" class="block px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-[0.2em] hover:text-navy-obsidian transition-colors">Request Service</a></li>
             </ul>
         </nav>
     </header>
 
-    <div id="mobileDrawer" class="fixed inset-0 bg-navy-obsidian z-[2000] translate-x-full transition-transform duration-500 flex flex-col justify-center items-center space-y-8">
-        <button class="absolute top-10 right-10 text-white text-4xl" onclick="toggleMenu()">&times;</button>
-        <a href="#about" class="text-white text-2xl font-bold uppercase tracking-widest" onclick="toggleMenu()">About</a>
-        <a href="#divisions" class="text-white text-2xl font-bold uppercase tracking-widest" onclick="toggleMenu()">Divisions</a>
-        <a href="javascript:void(0)" 
-   class="text-white text-2xl font-bold uppercase tracking-widest hover:text-accent-gold transition-colors" 
-   onclick="toggleServices()">
-    Services
-</a>
-
-<div id="mobile-services-context" class="hidden overflow-hidden transition-all duration-500 ease-in-out opacity-0 max-h-0">
-    <div class="py-8 space-y-10">
-        <div class="category">
-            <h4 class="text-accent-gold text-[10px] tracking-[0.4em] uppercase mb-6 opacity-70">Public Health & Cleaning</h4>
-            <ul class="space-y-4">
-                <li><a href="#public-health" class="text-white text-xl font-light italic hover:text-accent-gold block">Integrated Sanitation & Waste</a></li>
-                <li><a href="#public-health" class="text-white text-xl font-light italic hover:text-accent-gold block">Specialized Cleaning Services</a></li>
-                <li><a href="#public-health" class="text-white text-xl font-light italic hover:text-accent-gold block">Pest Control & Fumigation</a></li>
-            </ul>
+    <div id="mobileDrawer" class="fixed inset-0 z-[2000] bg-navy-obsidian transform translate-x-full transition-transform duration-500 lg:hidden overflow-y-auto">
+        <div class="flex justify-between items-center p-8">
+            <div class="text-accent-gold font-bold tracking-widest">MENU</div>
+            <div class="text-white text-3xl cursor-pointer" onclick="toggleMenu()">&times;</div>
         </div>
 
-        <div class="category">
-            <h4 class="text-accent-gold text-[10px] tracking-[0.4em] uppercase mb-6 opacity-70">General Supplies</h4>
-            <ul class="space-y-4">
-                <li><a href="#general-supplies" class="text-white text-xl font-light italic hover:text-accent-gold block">Mining & Industrial Materials</a></li>
-                <li><a href="#general-supplies" class="text-white text-xl font-light italic hover:text-accent-gold block">Medical & Lab Equipment</a></li>
-                <li><a href="#general-supplies" class="text-white text-xl font-light italic hover:text-accent-gold block">Agricultural & Supply Chain</a></li>
-            </ul>
-        </div>
+        <nav class="flex flex-col space-y-4 px-8 pb-20">
+            <a href="#home" class="text-white text-2xl font-bold uppercase tracking-widest border-b border-white/10 pb-4" onclick="toggleMenu()">Home</a>
+            
+            <div class="border-b border-white/10 pb-4">
+                <button onclick="toggleMobileSubMenu('about-sub')" class="w-full flex justify-between items-center text-white text-2xl font-bold uppercase tracking-widest">
+                    About
+                    <svg id="about-arrow" class="w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <div id="about-sub" class="mobile-sub-menu space-y-4 pl-4">
+                    <a href="#about" onclick="toggleMenu()" class="block text-white/60 text-lg font-light italic mt-6">Our Profile</a>
+                    <a href="#about" onclick="toggleMenu()" class="block text-white/60 text-lg font-light italic">Vision & Mission</a>
+                </div>
+            </div>
 
-        <div class="category">
-            <h4 class="text-accent-gold text-[10px] tracking-[0.4em] uppercase mb-6 opacity-70">Engineering & Logistics</h4>
-            <ul class="space-y-4">
-                <li><a href="#engineering" class="text-white text-xl font-light italic hover:text-accent-gold block">Civil Construction & Fabrication</a></li>
-                <li><a href="#engineering" class="text-white text-xl font-light italic hover:text-accent-gold block">Transport & Heavy Logistics</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-        <a href="#impact" class="text-white text-2xl font-bold uppercase tracking-widest" onclick="toggleMenu()">Impact</a>
-        <a href="#contact" class="text-white text-2xl font-bold uppercase tracking-widest" onclick="toggleMenu()">Request Service</a>
+            <div class="border-b border-white/10 pb-4">
+                <button onclick="toggleMobileSubMenu('services-sub')" class="w-full flex justify-between items-center text-white text-2xl font-bold uppercase tracking-widest">
+                    Services
+                    <svg id="services-arrow" class="w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                
+                <div id="services-sub" class="mobile-sub-menu space-y-8 pl-4">
+                    <div class="mt-8">
+                        <h4 class="text-accent-gold text-[10px] tracking-[0.4em] uppercase mb-4 opacity-70">Public Health</h4>
+                        <ul class="space-y-4 border-l border-white/10 pl-4">
+                            <li><a href="#services" onclick="toggleMenu()" class="block text-white/80 text-lg font-light italic">Cleaning & Sanitation</a></li>
+                            <li><a href="#services" onclick="toggleMenu()" class="block text-white/80 text-lg font-light italic">Pest Control</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-accent-gold text-[10px] tracking-[0.4em] uppercase mb-4 opacity-70">General Supplies</h4>
+                        <ul class="space-y-4 border-l border-white/10 pl-4">
+                            <li><a href="#services" onclick="toggleMenu()" class="block text-white/80 text-lg font-light italic">Mining Materials</a></li>
+                            <li><a href="#services" onclick="toggleMenu()" class="block text-white/80 text-lg font-light italic">Medical Equipment</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#contact" class="text-white text-2xl font-bold uppercase tracking-widest border-b border-white/10 pb-4" onclick="toggleMenu()">Contact</a>
+        </nav>
     </div>
 
     <main class="pt-32"> <section class="relative h-[90vh] flex items-center justify-center overflow-hidden bg-navy-obsidian">
@@ -417,100 +419,80 @@
     </footer>
 
     <script>
-        // Menu Toggle
+        // Toggle the full mobile drawer
         function toggleMenu() {
             const drawer = document.getElementById('mobileDrawer');
-            drawer.classList.toggle('translate-x-full');
-            drawer.classList.toggle('translate-x-0');
+            if (drawer.classList.contains('translate-x-full')) {
+                drawer.classList.remove('translate-x-full');
+                drawer.classList.add('translate-x-0');
+            } else {
+                drawer.classList.add('translate-x-full');
+                drawer.classList.remove('translate-x-0');
+            }
         }
 
-        function toggleServices() {
-    const servicesMenu = document.getElementById('mobile-services-context');
-    
-    if (servicesMenu.classList.contains('hidden')) {
-        // Show menu
-        servicesMenu.classList.remove('hidden');
-        // Small timeout to allow the transition to trigger after 'hidden' is removed
-        setTimeout(() => {
-            servicesMenu.classList.add('opacity-100', 'max-h-[2000px]');
-            servicesMenu.classList.remove('opacity-0', 'max-h-0');
-        }, 10);
-    } else {
-        // Hide menu
-        servicesMenu.classList.add('opacity-0', 'max-h-0');
-        servicesMenu.classList.remove('opacity-100', 'max-h-[2000px]');
-        // Wait for transition to finish before adding 'hidden' back
-        setTimeout(() => {
-            servicesMenu.classList.add('hidden');
-        }, 500);
-    }
-}
+        // Toggle sub-menus inside the mobile drawer
+        function toggleMobileSubMenu(menuId) {
+            const subMenu = document.getElementById(menuId);
+            const arrow = document.getElementById(menuId.split('-')[0] + '-arrow');
+            
+            if (subMenu.classList.contains('open')) {
+                subMenu.classList.remove('open');
+                arrow.classList.remove('rotate-180');
+            } else {
+                subMenu.classList.add('open');
+                arrow.classList.add('rotate-180');
+            }
+        }
 
-        // Scroll Effects
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('#site-header');
-            const progress = document.getElementById('progress-bar');
-            const winScroll = window.pageYOffset || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-
-            if (winScroll > 80) header.classList.add('scrolled');
-            else header.classList.remove('scrolled');
-
-            if (progress) progress.style.width = (winScroll / height) * 100 + "%";
-        });
-
-        // Intersection Observer for Reveal
-        const revealObserver = new IntersectionObserver((entries) => {
+        // Intersection Observer for Reveal animations
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    const stats = entry.target.querySelectorAll('.stat-number');
-                    if (stats.length) animateStats(stats);
                 }
             });
-        }, { threshold: 0.15 });
+        }, observerOptions);
 
-        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        // Animated Stats logic
-        function animateStats(counters) {
-            counters.forEach(counter => {
-                if (counter.dataset.animated) return;
-                counter.dataset.animated = "true";
-                const target = +counter.getAttribute('data-target');
-                let current = 0;
-                const increment = target / 80; // Duration factor
+        // Scroll Progress & Header Change
+        window.onscroll = function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
 
-                const update = () => {
-                    current += increment;
-                    if (current < target) {
-                        counter.innerText = Math.ceil(current);
-                        requestAnimationFrame(update);
-                    } else {
-                        counter.innerText = target + (target === 45 ? "%" : "+");
-                    }
-                };
-                update();
+            const header = document.getElementById('site-header');
+            if (winScroll > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        };
+
+        // Stat Counter Logic
+        const stats = document.querySelectorAll('.stat-number');
+        stats.forEach(stat => {
+            const target = +stat.getAttribute('data-target');
+            const updateCount = () => {
+                const count = +stat.innerText;
+                const speed = 200;
+                const inc = target / speed;
+                if (count < target) {
+                    stat.innerText = Math.ceil(count + inc);
+                    setTimeout(updateCount, 1);
+                } else {
+                    stat.innerText = target;
+                }
+            };
+            
+            // Trigger when visible
+            const statObserver = new IntersectionObserver((entries) => {
+                if(entries[0].isIntersecting) updateCount();
             });
-        }
-
-        // Form Step Logic
-        function changeStep(step) {
-            document.querySelectorAll('.form-step').forEach(s => s.classList.add('hidden'));
-            document.getElementById(`step${step}`).classList.remove('hidden');
-        }
-
-        // Form Submit
-        document.getElementById('groupPortal').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const btn = e.target.querySelector('button[type="submit"]');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = "<i class='fas fa-circle-notch fa-spin'></i> TRANSMITTING...";
-            setTimeout(() => { 
-                btn.innerHTML = "REQUEST SECURED"; 
-                btn.classList.replace('bg-navy-obsidian', 'bg-accent-gold');
-                btn.classList.add('text-navy-obsidian');
-            }, 2000);
+            statObserver.observe(stat);
         });
     </script>
 </body>
