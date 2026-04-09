@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transport & Logistics | King Kayo Group</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -13,8 +14,8 @@
                         'navy-obsidian': '#050B18',
                         'primary-green': '#042F2C',
                         'accent-gold': '#D4AF37',
-                        'soft-gold': '#E5C76B',
-                        'luxury-offwhite': '#FDFCFB'
+                        'luxury-offwhite': '#FDFCFB',
+                        'black-onyx': '#0A0A0A'
                     },
                     fontFamily: {
                         'serif': ['Playfair Display', 'serif'],
@@ -25,225 +26,340 @@
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap');
-        :root { --forest: #042F2C; --gold: #D4AF37; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #FFFFFF; color: var(--forest); }
-        h1, h2, h3, h4, .serif-brand { font-family: 'Playfair Display', serif; }
-        .bg-grid { background-image: radial-gradient(var(--forest) 0.5px, transparent 0.5px); background-size: 30px 30px; opacity: 0.05; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        .serif-brand { font-family: 'Playfair Display', serif; }
+        
+        .hero-bg {
+            background: linear-gradient(to right, rgba(255,255,255,0.9) 50%, rgba(29, 12, 105, 0.4) 100%), 
+                        url('img/logistics.jpeg');
+            background-size: cover; background-position: center;
+        }
+
+        /* Service Section Logic */
+        .service-section { display: none; }
+        .service-section.active { display: block; animation: sectionReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        
+        @keyframes sectionReveal { 
+            from { opacity: 0; transform: translateY(30px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Mobile Menu Animation */
+        .mobile-menu { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); clip-path: circle(0% at 100% 0%); pointer-events: none; opacity: 0; }
+        .mobile-menu.open { clip-path: circle(150% at 100% 0%); pointer-events: auto; opacity: 1; }
+        
+        .filter-btn.active { border-color: #D4AF37; color: white !important; opacity: 1 !important; }
+        .bg-grid { background-image: radial-gradient(#042F2C 0.5px, transparent 0.5px); background-size: 30px 30px; opacity: 0.05; }
+        
+        /* Utility */
+        .hidden { display: none; }
+        .active { display: block; }
     </style>
 </head>
-<body>
+<body class="bg-white text-navy-obsidian overflow-x-hidden">
 
-    <nav class="p-8 flex justify-between items-center border-b border-zinc-100 sticky top-0 bg-white/90 backdrop-blur-md z-50">
-        <a href="index.html" class="flex items-center space-x-2 group">
-            <span class="text-gold group-hover:-translate-x-1 transition-transform">←</span>
-            <span class="text-[10px] font-black uppercase tracking-widest text-forest">Back to Group</span>
-        </a>
-        <div class="w-40 h-50 flex items-center justify-center rounded-br-xl">
-            <img src="img/kkg-logo.png" alt="kecm">
-        </div>
-        </nav>
-
-    <main>
-        <section class="relative min-h-[80vh] flex flex-col lg:flex-row overflow-hidden">
-            <div class="absolute inset-0 bg-grid pointer-events-none"></div>
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-xl border-b border-zinc-100">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2 group">
+                <span class="text-accent-gold group-hover:-translate-x-1 transition-transform">←</span>
+                <span class="text-[10px] font-black uppercase tracking-widest text-navy-obsidian">Group Portfolio</span>
+            </a>
             
-            <div class="lg:w-1/2 p-12 lg:p-24 flex flex-col justify-center relative z-10">
-                <div class="w-12 h-1 bg-gold mb-8"></div>
-                <span class="text-gold text-[10px] font-black uppercase tracking-[0.5em] mb-4">Division: 02</span>
-                <h1 class="text-6xl lg:text-5xl font-black mb-8 leading-[0.9] uppercase tracking-tighter">
-                    Transport <br> & Logistics
-                </h1>
-                <p class="text-lg text-zinc-500 leading-relaxed max-w-md mb-10">
-                    Driving the pulse of commerce through integrated supply chain solutions and precision trailer manufacturing via Shumba Trailers & Fabrications.
+            <div class="flex items-center space-x-6">
+                <img src="img/kkg-logo.png" alt="King Kayo" class="h-20 md:h-20">
+                <!--button-- id="menuBtn" class="md:hidden z-50 p-2 focus:outline-none">
+                    <div id="burgerTop" class="w-6 h-0.5 bg-primary-green mb-1.5 transition-all"></div>
+                    <div id="burgerMid" class="w-6 h-0.5 bg-primary-green mb-1.5 transition-all"></div>
+                    <div id="burgerBot" class="w-6 h-0.5 bg-primary-green transition-all"></div>
+                </button-->
+            </div>
+
+            <div class="hidden md:flex items-center space-x-10 text-[10px] font-bold uppercase tracking-widest text-primary-green">
+                <a href="#eng_services" class="hover:text-accent-gold transition-colors">Engineering</a>
+                <a href="#fleet_services" class="hover:text-accent-gold transition-colors">Fleet</a>
+                <a href="#contact" class="bg-navy-obsidian text-white px-6 py-3 hover:bg-black transition-all">Inquiry</a>
+            </div>
+        </div>
+    </nav>
+
+    <!--div-- id="mobileMenu" class="mobile-menu fixed inset-0 bg-navy-obsidian z-40 flex flex-col justify-center px-12 md:hidden">
+        <div class="space-y-8">
+            <a href="#eng_services" onclick="toggleMenu()" class="block text-4xl font-black text-white hover:text-accent-gold uppercase tracking-tighter serif-brand">Engineering</a>
+            <a href="#fleet_services" onclick="toggleMenu()" class="block text-4xl font-black text-white hover:text-accent-gold uppercase tracking-tighter serif-brand">Fleet Repair</a>
+            <a href="#contact" onclick="toggleMenu()" class="block text-4xl font-black text-white hover:text-accent-gold uppercase tracking-tighter serif-brand">Contact</a>
+            <hr class="border-white/10 my-8">
+            <a href="#contact" onclick="toggleMenu()" class="text-accent-gold font-bold uppercase tracking-[0.2em] text-sm italic">Request Engineering Brief →</a>
+        </div>
+    </div-->
+
+    <main class="pt-20">
+        <section class="hero-bg min-h-[85vh] flex flex-col justify-center items-center px-6 lg:px-24 bg-luxury-offwhite relative overflow-hidden">
+            <div class="absolute inset-0 bg-grid pointer-events-none"></div>
+            <div class="max-w-6xl w-full relative z-10 py-12">
+                <div class="inline-block border-l-4 border-accent-gold pl-4 md:pl-6 mb-8">
+                    <span class="text-accent-gold text-[10px] md:text-[12px] font-black tracking-[0.6em] uppercase block">Division 02:</span>
+                    <h1 class="serif-title font-black text-[12vw] md:text-[5vw] leading-[0.85] text-navy-obsidian uppercase mt-4">
+                        Logistics & <br>
+                        <span class="text-accent-gold font-light tracking-normal border-b-4 border-navy-obsidian">Engineering.</span>
+                    </h1>
+                </div>
+                <p class="text-base md:text-2xl text-zinc-500 font-light max-w-2xl leading-relaxed mb-12">
+                    Powering regional commerce through precision trailer manufacturing via <span class="text-black-onyx font-bold">Shumba Trailers & Fabrications</span> and cross-border freight logistics.
                 </p>
-                
-                <div class="grid grid-cols-2 gap-8 border-t border-zinc-100 pt-10">
-                    <div>
-                        <p class="text-3xl font-black text-forest">6+ YRS</p>
-                        <p class="text-[9px] uppercase tracking-widest text-zinc-400 font-bold">Industry Experience</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="#eng_services" class="bg-navy-obsidian text-white text-center px-10 py-5 text-xs font-black uppercase tracking-widest hover:bg-black transition-all shadow-xl">View Capabilities</a>
+                    <div class="flex items-center space-x-4 px-6 border-l border-zinc-200">
+                        <span class="text-2xl md:text-3xl font-black text-navy-obsidian">SADC</span>
+                        <span class="text-[9px] uppercase tracking-widest text-zinc-400 font-bold leading-tight">Regional<br>Reach</span>
                     </div>
-                    <div>
-                        <p class="text-3xl font-black text-forest">SADC</p>
-                        <p class="text-[9px] uppercase tracking-widest text-zinc-400 font-bold">Regional Reach</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lg:w-1/2 relative min-h-[500px] bg-forest">
-                <img src="img//logistics/logistics-hero.jpg" alt="Fleet Operations" class="w-full h-full object-cover opacity-80 scale-110 hover:scale-100 transition-transform duration-[2000ms]">
-                <div class="absolute bottom-12 left-12 bg-white p-8 shadow-2xl max-w-xs hidden lg:block">
-                    <p class="text-[10px] font-black uppercase tracking-widest text-gold mb-2">Technical Strength</p>
-                    <p class="text-sm font-bold text-forest uppercase tracking-tighter">"The Lion Roars, Our Strength in Performance" </p>
                 </div>
             </div>
         </section>
 
-<section class="py-24 px-8 lg:px-24 bg-white">
-            <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col md:flex-row justify-between items-baseline mb-16 border-b border-zinc-100 pb-8">
-                    <h2 class="serif-title text-3xl font-black uppercase tracking-tighter text-forest">Integrated Solutions</h2>
-                    <p class="text-[10px] font-black text-gold uppercase tracking-[0.3em]">Trailer Manufacturing & Logistics</p>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-12">
-                    
-                    <div class="group border border-zinc-100 overflow-hidden hover:shadow-2xl transition-all duration-700">
-                        <div class="h-80 overflow-hidden relative">
-                            <img src="img/logistics/manufacturing.jpg" alt="Custom Trailer Fabrication" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000">
-                            <div class="absolute inset-0 bg-forest/10 group-hover:bg-transparent transition-colors"></div>
-                            <div class="absolute top-6 left-6 bg-white px-4 py-2 shadow-lg">
-                                <span class="text-[10px] font-bold text-gold uppercase tracking-widest italic">Shumba Division</span>
-                            </div>
-                        </div>
-                        <div class="p-10">
-                            <h4 class="serif-title text-2xl font-bold mb-4 text-forest uppercase">Custom Trailer Manufacturing</h4>
-                            <p class="text-sm text-zinc-500 leading-relaxed mb-6">Bespoke engineering for high-capacity transport. We design and manufacture trailers from the ground up to fit specific vehicle and cargo requirements.</p>
-                            <div class="grid grid-cols-2 gap-4 border-t border-zinc-50 pt-6">
-                                <ul class="text-[10px] font-bold uppercase tracking-wider space-y-2">
-                                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-2"></span>Fuel Storage Tanks</li>
-                                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-2"></span>Flat Deck Trailers</li>
-                                </ul>
-                                <ul class="text-[10px] font-bold uppercase tracking-wider space-y-2">
-                                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-2"></span>Railway Wagons</li>
-                                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-2"></span>Modular Chassis</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="group border border-zinc-100 overflow-hidden hover:shadow-2xl transition-all duration-700">
-                        <div class="h-80 overflow-hidden relative">
-                            <img src="img/logistics/repair.jpg" alt="Fleet Restoration" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000">
-                            <div class="absolute inset-0 bg-forest/10 group-hover:bg-transparent transition-colors"></div>
-                            <div class="absolute top-6 left-6 bg-white px-4 py-2 shadow-lg">
-                                <span class="text-[10px] font-bold text-gold uppercase tracking-widest italic">Asset Lifecycle</span>
-                            </div>
-                        </div>
-                        <div class="p-10">
-                            <h4 class="serif-title text-2xl font-bold mb-4 text-forest uppercase">Fleet Restoration & Repair</h4>
-                            <p class="text-sm text-zinc-500 leading-relaxed mb-6">Extending the life of your logistics assets through expert structural repairs, sandblasting, and precision welding of damaged components.</p>
-                            <div class="grid grid-cols-2 gap-4 border-t border-zinc-50 pt-6">
-                                <ul class="text-[10px] font-bold uppercase tracking-wider space-y-2">
-                                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-2"></span>Damaged Tank Repair</li>
-                                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-2"></span>Structural Welding</li>
-                                </ul>
-                                <ul class="text-[10px] font-bold uppercase tracking-wider space-y-2">
-                                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-2"></span>Chassis Alignment</li>
-                                    <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold mr-2"></span>24/7 Mobile Response</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="group border border-zinc-100 overflow-hidden hover:shadow-2xl transition-all duration-700">
-                        <div class="h-64 overflow-hidden relative">
-                            <img src="img/logistics/welding.png" alt="Skilled Labour" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000">
-                            <div class="absolute inset-0 bg-forest/10 group-hover:bg-transparent transition-colors"></div>
-                        </div>
-                        <div class="p-10">
-                            <h4 class="serif-title text-xl font-bold mb-4 text-forest uppercase">Technical Labour Hire</h4>
-                            <p class="text-xs text-zinc-500 leading-relaxed mb-6">On-site provision of fully qualified welders and steel fabricators for mining, construction, and large-scale project management.</p>
-                            <span class="text-[9px] font-black uppercase tracking-[0.3em] text-gold border-b border-gold pb-1">Direct Technical Support</span>
-                        </div>
-                    </div>
-
-                    <div class="group border border-zinc-100 overflow-hidden hover:shadow-2xl transition-all duration-700">
-                        <div class="h-64 overflow-hidden relative">
-                            <img src="img/logistics/fleet.jpg" alt="Industrial Freight" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000">
-                            <div class="absolute inset-0 bg-forest/10 group-hover:bg-transparent transition-colors"></div>
-                        </div>
-                        <div class="p-10">
-                            <h4 class="serif-title text-xl font-bold mb-4 text-forest uppercase">Regional Industrial Freight</h4>
-                            <p class="text-xs text-zinc-500 leading-relaxed mb-6">Cross-border heavy-duty hauling across SADC corridors, utilizing our own custom-manufactured trailers for maximum reliability.</p>
-                            <span class="text-[9px] font-black uppercase tracking-[0.3em] text-gold border-b border-gold pb-1">SADC Network Strength</span>
-                        </div>
-                    </div>
-
+        <section id="eng_services" class="sticky top-[72px] z-30 bg-black-onyx border-y border-white/10 shadow-2xl">
+            <div class="max-w-7xl mx-auto px-4 overflow-x-auto no-scrollbar flex md:justify-center items-center">
+                <div class="flex whitespace-nowrap md:space-x-2">
+                    <button onclick="showEngService('engineering')" class="filter-btn active px-6 md:px-8 py-5 md:py-6 text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] text-white opacity-60 hover:opacity-100 transition-all border-b-4 border-transparent" data-target="engineering">01 Engineering</button>
+                    <button onclick="showEngService('security_eng')" class="filter-btn px-6 md:px-8 py-5 md:py-6 text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] text-white opacity-60 hover:opacity-100 transition-all border-b-4 border-transparent" data-target="security_eng">02 Security & Patrol</button>
                 </div>
             </div>
         </section>
+
+        <div class="max-w-7xl mx-auto px-6 py-16 md:py-24 min-h-[500px]">
+            <section id="engineering" class="eng-section active">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
+                    <div class="space-y-8 md:space-y-12">
+                        <h2 class="serif-title text-4xl md:text-5xl font-black text-black-onyx uppercase leading-[0.9]">Engineering &<br>Construction</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="p-6 bg-zinc-50 border-l-4 border-accent-gold uppercase font-black text-[10px] tracking-widest text-black-onyx">House Construction</div>
+                            <div class="p-6 bg-zinc-50 border-l-4 border-accent-gold uppercase font-black text-[10px] tracking-widest text-black-onyx">Lodge Development</div>
+                            <div class="p-6 bg-zinc-50 border-l-4 border-accent-gold uppercase font-black text-[10px] tracking-widest text-black-onyx">School Infrastructure</div>
+                            <div class="p-6 bg-zinc-50 border-l-4 border-accent-gold uppercase font-black text-[10px] tracking-widest text-black-onyx">Hospital & Clinics</div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="bg-black-onyx rounded-[1.5rem] md:rounded-[2rem] h-48 md:h-64 overflow-hidden relative">
+                            <img src="img/logistics/welder.png" alt="Construction" class="absolute inset-0 w-full h-full object-cover opacity-70">
+                        </div>
+                        <div class="bg-black-onyx rounded-[1.5rem] md:rounded-[2rem] h-48 md:h-64 overflow-hidden relative">
+                            <img src="https://tse1.mm.bing.net/th/id/OIP.tLCeUeSUkSew9Lof0q3s3wHaEK?w=1200&h=675&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Construction" class="absolute inset-0 w-full h-full object-cover opacity-40">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="security_eng" class="eng-section hidden">
+                <div class="bg-black-onyx rounded-[2rem] md:rounded-[3rem] p-8 md:p-24 text-white">
+                    <div class="max-w-3xl">
+                            <svg class="w-auto h-12 text-accent-gold mb-4" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm7 10c0 4.52-2.98 8.69-7 9.93-4.02-1.24-7-5.41-7-9.93V6.3l7-3.11 7 3.11V11z"/>
+                            <path d="M12 7l-2.5 4h5L12 7z" />
+                            </svg>
+                        <span class="text-accent-gold text-xs font-black uppercase tracking-[0.5em] mb-6 block">Defense & Protection</span>
+                        <h2 class="serif-title text-3xl md:text-5xl font-black uppercase mb-8 md:mb-12">Security Patrol.</h2>
+                        <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+                            <div class="space-y-4">
+                                <h4 class="text-accent-gold uppercase font-bold text-xs">Manned Guarding</h4>
+                                <p class="text-sm opacity-60">Highly trained static guards for industrial and commercial asset protection.</p>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="text-accent-gold uppercase font-bold text-xs">Rapid Response</h4>
+                                <p class="text-sm opacity-60">Mobile patrol units equipped with 24/7 surveillance protocols.</p>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="text-accent-gold uppercase font-bold text-xs">Tactical Escort</h4>
+                                <p class="text-sm opacity-60">Professional security for high-value cargo and personnel transit.</p>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="text-accent-gold uppercase font-bold text-xs">CCTV Monitoring</h4>
+                                <p class="text-sm opacity-60">Remote electronic surveillance and biometric access systems.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section id="fleet_services" class="sticky top-[72px] z-30 bg-navy-obsidian border-y border-white/10 shadow-2xl">
+            <div class="max-w-7xl mx-auto px-4 overflow-x-auto no-scrollbar flex md:justify-center items-center">
+                <div class="flex whitespace-nowrap md:space-x-2">
+                    <button onclick="showFleetService('logistics_fleet')" class="filter-btn active px-6 md:px-8 py-5 md:py-6 text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] text-white opacity-60 hover:opacity-100 transition-all border-b-4 border-transparent" data-target="logistics_fleet">01 Logistics</button>
+                    <button onclick="showFleetService('farming_fleet')" class="filter-btn px-6 md:px-8 py-5 md:py-6 text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] text-white opacity-60 hover:opacity-100 transition-all border-b-4 border-transparent" data-target="farming_fleet">02 Farming</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="max-w-7xl mx-auto px-6 py-16 md:py-24 min-h-[500px]">
+            <section id="logistics_fleet" class="fleet-service-section active">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-5">
+                        <h2 class="serif-title text-4xl md:text-5xl font-black text-navy-obsidian uppercase leading-none mb-8">Transport Logistics</h2>
+                        <p class="text-zinc-500 mb-10">Moving goods and personnel with precision and reliability across the region.</p>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <span class="block text-accent-gold font-black text-[10px] uppercase">Heavy Duty</span>
+                                <p class="text-xs font-bold uppercase tracking-tighter">Trucks & Hauling</p>
+                            </div>
+                            <div class="space-y-2">
+                                <span class="block text-accent-gold font-black text-[10px] uppercase">Urban Transit</span>
+                                <p class="text-xs font-bold uppercase tracking-tighter">Taxi Lift & Motorbikes</p>
+                            </div>
+                            <div class="space-y-2">
+                                <span class="block text-accent-gold font-black text-[10px] uppercase">Eco-Mobile</span>
+                                <p class="text-xs font-bold uppercase tracking-tighter">Bicycle Services</p>
+                            </div>
+                            <div class="space-y-2">
+                                <span class="block text-accent-gold font-black text-[10px] uppercase">Personnel</span>
+                                <p class="text-xs font-bold uppercase tracking-tighter">Staff Transport</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-7">
+                        <img src="img/logistics/logistics-hero.jpg" alt="Logistics" class="rounded-[2rem] md:rounded-[3rem] shadow-2xl w-full h-auto object-cover">
+                    </div>
+                    <div class="lg:col-span-7">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.b_2dnDiL9_bxSnP94kQNvQHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Logistics" class="rounded-[2rem] md:rounded-[3rem] shadow-2xl w-full h-auto object-cover">
+                    </div>
+                </div>
+            </section>
+
+            <section id="farming_fleet" class="fleet-service-section hidden">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                    <div class="order-2 lg:order-1 relative">
+                        <img src="https://www.dudleypeverill.co.uk/wp-content/uploads/2021/12/Tenant-dark-scaled-1170x731-1.jpg" alt="Agriculture" class="rounded-[2rem] md:rounded-[4rem] shadow-2xl relative z-10 w-full h-auto">
+                    </div>
+                    <div class="order-1 lg:order-2">
+                        <h2 class="serif-title text-3xl md:text-6xl font-black text-navy-obsidian uppercase leading-tight mb-8">Farm<br>Limited</h2>
+                        <div class="flex flex-col space-y-6 md:space-y-8">
+                            <div class="flex items-center space-x-6">
+                                <div class="shrink-0 w-12 h-12 bg-accent-gold/10 rounded-full flex items-center justify-center text-accent-gold font-bold">01</div>
+                                <div>
+                                    <h4 class="font-black uppercase text-xs tracking-widest">Crop Production</h4>
+                                    <p class="text-xs text-zinc-400">Grains, Vegetables, and specialized crops.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-6">
+                                <div class="shrink-0 w-12 h-12 bg-accent-gold/10 rounded-full flex items-center justify-center text-accent-gold font-bold">02</div>
+                                <div>
+                                    <h4 class="font-black uppercase text-xs tracking-widest">Animal Husbandry</h4>
+                                    <p class="text-xs text-zinc-400">Livestock rearing and management.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-6">
+                                <div class="shrink-0 w-12 h-12 bg-accent-gold/10 rounded-full flex items-center justify-center text-accent-gold font-bold">03</div>
+                                <div>
+                                    <h4 class="font-black uppercase text-xs tracking-widest">Aquaculture</h4>
+                                    <p class="text-xs text-zinc-400">Commercial fish farming and processing.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
-    <section id="contact" class="py-32 bg-luxury-offwhite border-t border-slate-100">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-20 items-center">
-                
-                <div class="reveal">
-                    <h2 class="serif-title text-4xl md:text-5xl text-navy-obsidian leading-tight mb-8">
-                        Reach us for your <br><span class="italic text-primary-green">Desired Service.</span>
-                    </h2>
-                    
-                    <div class="space-y-8">
-                        <div class="flex items-start space-x-6">
-                            <div class="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border border-slate-100">
-                                <svg class="w-5 h-5 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            </div>
-                            <div>
-                                <h4 class="text-xs font-black uppercase tracking-widest text-navy-obsidian mb-1">Headquarters</h4>
-                                <p class="text-sm text-slate-500">Off-Mumbwa Road, Chinika Industrial Area, <br>Lusaka-Zambia</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start space-x-6">
-                            <div class="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center flex-shrink-0 border border-slate-100">
-                                <svg class="w-5 h-5 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                            </div>
-                            <div>
-                                <h4 class="text-xs font-black uppercase tracking-widest text-navy-obsidian mb-1">Email Correspondence</h4>
-                                <p class="text-sm text-slate-500 font-bold">shumba.gendere@gmail.com</p>
-                            </div>
-                        </div>
+    <footer id="contact" class="bg-navy-obsidian text-white py-20 md:py-32 px-6">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 md:gap-20">
+            <div class="lg:col-span-5">
+                <h2 class="serif-brand text-3xl md:text5xl font-black uppercase mb-12 leading-none">The Lion <br><span class="text-accent-gold italic">Roars.</span></h2>
+                <div class="space-y-8">
+                    <div>
+                        <span class="text-accent-gold text-[10px] font-black uppercase tracking-widest block mb-2">Engineering HQ</span>
+                        <p class="text-sm opacity-70">Off-Mumbwa Road, Chinika Industrial Area, <br>Lusaka, Zambia</p>
+                    </div>
+                    <div>
+                        <span class="text-accent-gold text-[10px] font-black uppercase tracking-widest block mb-2">Technical Briefs</span>
+                        <p class="text-sm font-black tracking-widest">shumba.gendere@gmail.com</p>
                     </div>
                 </div>
-
-                <div class="reveal" style="transition-delay: 0.2s;">
-                    <div class="bg-navy-obsidian rounded-[3rem] p-12 md:p-16 text-center relative overflow-hidden shadow-2xl">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-accent-gold/5 rounded-full -mr-16 -mt-16"></div>
-                        
-                        <div class="relative z-10">
-                            <h3 class="serif-title text-3xl text-white mb-6">Which <span class="italic text-soft-gold">Service</span> do you need?</h3>
-                            <p class="text-slate-400 text-sm mb-10 leading-relaxed">
-                                Complete our formal inquiry brief to ensure your request is routed to the appropriate division lead.
-                            </p>
-                            
-                            <a href="index.php" class="inline-block w-full py-5 bg-accent-gold text-navy-obsidian text-[10px] font-black uppercase tracking-[0.4em] rounded-2xl hover:bg-white transition-all duration-300 shadow-xl shadow-accent-gold/10">
-                                Open Service Form
-                            </a>
-                            
-                            <p class="mt-8 text-[9px] uppercase tracking-[0.2em] text-slate-500 font-bold">
-                                Estimated Response Time: <span class="text-slate-300">24—48 Hours</span>
-                            </p>
-                        </div>
-                    </div>
+            </div>
+            <div class="lg:col-span-7">
+                <div class="bg-white/5 p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] border border-white/10 text-center">
+                    <h3 class="serif-brand text-2xl md:text-3xl mb-6">Need an Engineering <span class="text-accent-gold italic">Brief?</span></h3>
+                    <p class="text-slate-400 text-sm mb-10 leading-relaxed max-w-md mx-auto">Submit your project requirements to our lead technical engineers for a customized consultation.</p>
+                    <a href="index.php" class="inline-block w-full py-5 md:py-6 bg-accent-gold text-navy-obsidian text-[11px] font-black uppercase tracking-[0.5em] rounded-2xl hover:bg-white transition-all">
+                        Open Inquiry Portal
+                    </a>
                 </div>
-
             </div>
         </div>
-    </section>
-
-        <footer class="bg-navy-obsidian text-white py-20 px-6 border-t border-white/5">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
-            <div class="col-span-2">
-                <div class="flex items-center space-x-3 mb-8">
-                    <div class="w-8 h-8 bg-accent-gold rounded-sm flex items-center justify-center">
-                        <span class="text-navy-obsidian font-serif font-bold">K</span>
-                    </div>
-                    <h3 class="serif-title text-2xl font-bold">King Kayo Group</h3>
-                </div>
-                <p class="text-slate-400 max-w-sm mb-8 leading-relaxed text-sm">
-                    King Kayo Group is a disability-led institutional powerhouse driving sustainable commercial success and inclusivity.
-                </p>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] uppercase tracking-widest text-slate-500">
-            <p>© 2026 King Kayo Group of Companies. All Rights Reserved.</p>
-            <div class="flex space-x-8 mt-4 md:mt-0">
-                <a href="#" class="hover:text-white">Privacy</a>
-                <a href="#" class="hover:text-white">Terms</a>
-                <a href="https://zambezi-digital-solutions-limited.github.io/ZDS-Website" class="hover:text-white">Zambezi Digital Solutions Limited</a>
+        <div class="max-w-7xl mx-auto mt-20 md:mt-32 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] uppercase tracking-widest text-slate-500 gap-4">
+            <p class="text-center md:text-left">© 2026 King Kayo Group - Engineering Division.</p>
+            <div class="flex space-x-8">
+                <a href="https://zambezi-digital-solutions-limited.github.io/ZDS-Website" class="hover:text-white transition-colors">Built by Zambezi Digital Solutions Limited</a>
             </div>
         </div>
     </footer>
+
+    <script>
+        /*/ Toggle Mobile Menu Logic
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const bTop = document.getElementById('burgerTop');
+        const bMid = document.getElementById('burgerMid');
+        const bBot = document.getElementById('burgerBot');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('open');
+            document.body.classList.toggle('overflow-hidden');
+            bTop.classList.toggle('rotate-45');
+            bTop.classList.toggle('translate-y-2');
+            bMid.classList.toggle('opacity-0');
+            bBot.classList.toggle('-rotate-45');
+            bBot.classList.toggle('-translate-y-2');
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+*/
+        // Engineering Logic
+        function showEngService(id) {
+            document.querySelectorAll('.eng-section').forEach(s => {
+                s.classList.add('hidden');
+                s.classList.remove('active');
+            });
+            const target = document.getElementById(id);
+            if(target) {
+                target.classList.remove('hidden');
+                target.classList.add('active');
+            }
+
+            document.querySelectorAll('#eng_services .filter-btn').forEach(b => {
+                b.classList.remove('active');
+                if(b.dataset.target === id) b.classList.add('active');
+            });
+
+            window.scrollTo({
+                top: document.getElementById('eng_services').offsetTop - 72,
+                behavior: 'smooth'
+            });
+        }
+
+        // Fleet Logic
+        function showFleetService(id) {
+            document.querySelectorAll('.fleet-service-section').forEach(s => {
+                s.classList.add('hidden');
+                s.classList.remove('active');
+            });
+            const target = document.getElementById(id);
+            if(target) {
+                target.classList.remove('hidden');
+                target.classList.add('active');
+            }
+
+            document.querySelectorAll('#fleet_services .filter-btn').forEach(b => {
+                b.classList.remove('active');
+                if(b.dataset.target === id) b.classList.add('active');
+            });
+
+            window.scrollTo({
+                top: document.getElementById('fleet_services').offsetTop - 72,
+                behavior: 'smooth'
+            });
+        }
+    </script>
 </body>
 </html>
