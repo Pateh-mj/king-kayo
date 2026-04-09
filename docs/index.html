@@ -120,9 +120,9 @@
                                     <h5 class="text-navy-obsidian font-serif text-lg">Engineering & Logistics</h5>
                                 </div>
                                 <ul class="space-y-3">
-                                    <li><a href="#engineering" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Civil Construction</a></li>
-                                    <li><a href="#engineering" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Industrial Fabrication</a></li>
-                                    <li><a href="#engineering" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Logistics & Personnel</a></li>
+                                    <li><a href="#logistics" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Civil Construction</a></li>
+                                    <li><a href="#logistics" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Industrial Fabrication</a></li>
+                                    <li><a href="#logistics" class="text-[11px] text-slate-500 hover:text-accent-gold transition-colors block uppercase tracking-wider">Logistics & Personnel</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -150,7 +150,8 @@
                 </button>
                 <div id="about-sub" class="mobile-sub-menu space-y-4 pl-4">
                     <a href="#about" onclick="toggleMenu()" class="block text-white/60 text-lg font-light italic mt-6">Our Profile</a>
-                    <a href="#about" onclick="toggleMenu()" class="block text-white/60 text-lg font-light italic">Vision & Mission</a>
+                    <a href="#mission" onclick="toggleMenu()" class="block text-white/60 text-lg font-light italic">Vision & Mission</a>
+                    <a href="about.html" onclick="toggleMenu()" class="block text-white/60 text-lg font-light italic">Read Full Bio</a>
                 </div>
             </div>
 
@@ -164,15 +165,22 @@
                     <div class="mt-8">
                         <h4 class="text-accent-gold text-[10px] tracking-[0.4em] uppercase mb-4 opacity-70">Public Health</h4>
                         <ul class="space-y-4 border-l border-white/10 pl-4">
-                            <li><a href="#services" onclick="toggleMenu()" class="block text-white/80 text-lg font-light italic">Cleaning & Sanitation</a></li>
-                            <li><a href="#services" onclick="toggleMenu()" class="block text-white/80 text-lg font-light italic">Pest Control</a></li>
+                            <li><a href="#public-health" onclick="toggleMenu()" class="block text-white/80 text-lg font-light italic">Cleaning & Sanitation</a></li>
+                            <li><a href="#public-health" onclick="toggleMenu()" class="block text-white/80 text-lg font-light italic">Pest Control</a></li>
+                        </ul>
+                    </div>
+                    <div class="mt-8">
+                        <h4 class="text-accent-gold text-[10px] tracking-[0.4em] uppercase mb-4 opacity-70">Logistics</h4>
+                        <ul class="space-y-4 border-l border-white/10 pl-4">
+                            <li><a href="#logistics" onclick="toggleMenu()" class="block text-white/80 text-lg font-light italic">Traveling</a></li>
+                            <li><a href="#logistics" onclick="toggleMenu()" class="block text-white/80 text-lg font-light italic">Construction</a></li>
                         </ul>
                     </div>
                     <div>
                         <h4 class="text-accent-gold text-[10px] tracking-[0.4em] uppercase mb-4 opacity-70">General Supplies</h4>
                         <ul class="space-y-4 border-l border-white/10 pl-4">
-                            <li><a href="#services" onclick="toggleMenu()" class="block text-white/80 text-lg font-light italic">Mining Materials</a></li>
-                            <li><a href="#services" onclick="toggleMenu()" class="block text-white/80 text-lg font-light italic">Medical Equipment</a></li>
+                            <li><a href="#general-supplies" onclick="toggleMenu()" class="block text-white/80 text-lg font-light italic">Mining Materials</a></li>
+                            <li><a href="#general-supplies" onclick="toggleMenu()" class="block text-white/80 text-lg font-light italic">Medical Equipment</a></li>
                         </ul>
                     </div>
                 </div>
@@ -216,7 +224,7 @@
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-12 border-t border-slate-100 pt-12">
+                <div id="mission" class="grid md:grid-cols-2 gap-12 border-t border-slate-100 pt-12">
                     <div>
                         <h4 class="text-navy-obsidian font-bold text-[10px] uppercase tracking-[0.2em] mb-4">Our Mission</h4>
                         <p class="text-sm text-slate-500 leading-relaxed">Delivering precision-based solutions while championing a diverse, differently-abled workforce to redefine regional industry standards.</p>
@@ -287,7 +295,7 @@
             </div>
             </div>
 
-                <div class="division-card">
+                <div id="public-health"class="division-card">
                 <div class="lg:w-1/2 h-80 lg:h-auto bg-center bg-cover transition-transform duration-[2000ms] hover:scale-105" 
                      style="background-image: url('img/public-health/cleaning.png');"></div>
                 <div class="lg:w-1/2 p-12 md:p-20 flex flex-col justify-center bg-slate-50 reveal">
@@ -302,7 +310,7 @@
                 </div>
             </div>
 
-            <div class="division-card reverse">
+            <div id="logistics" class="division-card reverse">
                 <div class="lg:w-1/2 h-80 lg:h-auto bg-center bg-cover transition-transform duration-[2000ms] hover:scale-105" 
                      style="background-image: url('img/logistics.jpeg');"></div>
                 <div class="lg:w-1/2 p-12 md:p-20 flex flex-col justify-center bg-white reveal">
@@ -317,7 +325,7 @@
                 </div>
             </div>
 
-            <div class="division-card">
+            <div id="general-supplies" class="division-card">
                 <div class="lg:w-1/2 h-80 lg:h-auto bg-center bg-cover transition-transform duration-[2000ms] hover:scale-105" 
                      style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=2000');"></div>
                 <div class="lg:w-1/2 p-12 md:p-20 flex flex-col justify-center bg-slate-50 reveal">
